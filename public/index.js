@@ -739,10 +739,13 @@ const createChart = async (chartInfo) => {
 
 document.addEventListener('DOMContentLoaded', async () => {
   setGlobalChartTheme();
-
-  charts.forEach((chart) => {
-    if (chart.enabled) {
-      createChart(chart);
-    }
-  });
 });
+
+window.createChartForDiv = async (node) => {
+  // eslint-disable-next-line no-console
+  console.log(node.value);
+  const chart = charts.find((ch) => ch.divId === node.value && ch.enabled === true);
+  if (chart) {
+    await createChart(chart);
+  }
+};
