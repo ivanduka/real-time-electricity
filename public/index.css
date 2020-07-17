@@ -1,11 +1,112 @@
-#container {
-    width: 1000px;
-    height: 600px;
+@charset "utf-8";
+
+/* CSS Sandbox File for highcharts and surrounding styles */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-#content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.province-buttons {
     align-items: center;
+    text-align: center;
 }
+
+/* CSS Sandbox File for highcharts and surrounding styles */
+
+:root {
+    --col-main-accent: #AF3C43;
+    --col-main-light: white;
+
+    --col-primary-light: #c2d3ea;
+    --col-primary: #708196;
+    --col-primary-dark: #263749;
+    --col-grid: #ddd;
+    --col-grid-dark: #444444;
+    --col-contrast-dark: #AF3B42;
+    --col-contrast-med: #ba454b;
+    --col-contrast-light: #f59494;
+    --col-text-main: #494949;
+    --col-text-emph: #333;
+    /*--col-text-deemph: ;*/
+    --col-titanium-yellow: #efef00;
+
+    /* ['#1f3042', '#5b6c80', '#9dafc5', '#f59494', '#ba454b', '#6b0011'] */
+}
+
+body {
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+sup {
+    font-size: 0.5em;
+    border-radius: 5px;
+    padding: 3px;
+    background-color: var(--col-main-accent);
+    color: var(--col-main-light);
+}
+
+h1 {
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+h3.subtitle {
+    text-align: right;
+    font-size: 0.75em;
+}
+
+.province-buttons {
+    align-items: center;
+    text-align: center;
+}
+
+
+.button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+hr.chartDivider {
+    border-top: 6px dotted var(--col-main-accent);
+    width: 75%;
+}
+
+.chart {
+    text-align: center;
+}
+
+/* From https://fdossena.com/?p=html5cool/buttons/i.frag */
+button.chartButton {
+    display:inline-block;
+    padding:0.35em 1.2em;
+    border:0 solid #6b0011;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.5em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family: 'Helvetica Neue','Roboto',sans-serif;
+    font-weight:300;
+    color:#6b0011;
+    text-align:center;
+    transition: all 0.2s;
+    background-color: #fff;
+}
+
+button.chartButton:hover {
+    color:#fff;
+    background-color:#6b0011;
+}
+
+button.chartButton:active {
+    color: #BBBBBB;
+    border-color: #BBBBBB;
+}
+
+@media all and (max-width:30em) {
+    button {
+        display: block;
+        margin: 0.4em auto;
+    }
+}
+
