@@ -82,6 +82,7 @@ function errorHandler(err, req, res, next) {
   res.statusMessage = err.message.replace(/[^\t\x20-\x7e\x80-\xff]/, '_');
   res.status(500)
     .send();
+  // eslint-disable-next-line no-console
   console.log(err);
 }
 

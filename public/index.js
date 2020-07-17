@@ -685,20 +685,19 @@ const charts = [
 // Charts initialization
 // #####################
 
-const sortArrayByDate = (data) => data.sort((a, b) => b.DateTime - a.DateTime);
-
 // request data from API endpoint
 const fetchDataFromDB = async (type) => {
   const result = await fetch(`/api/${type}`);
   if (!result.ok) {
+    // eslint-disable-next-line no-console
     console.error(`Couldn't fetch ${type}: ${result}`);
     return [];
   }
   const data = await result.json();
   if (data.length === 0) {
+    // eslint-disable-next-line no-console
     return console.log(`Error getting ${type}`);
   }
-  console.dir(Object.keys(data[0][0]));
   return data;
 };
 
@@ -711,13 +710,17 @@ const getData = async (chartInfo, exitingChart) => {
     // two cases: either # of series === # of queries
     // OR all series are using the first and only query
     const rawData = dataArrays.length > 1 ? dataArrays[i] : dataArrays[0];
-    const dataArray = sortArrayByDate(rawData);
 
+    // Sorting array by date
+    const dataArray = rawData.sort((a, b) => b.DateTime - a.DateTime);
+
+    // Creating 2d array for Highcharts
     const seriesData = dataArray.map((row) => [row.DateTime, row[chartInfo.seriesInfo[i].valCol]]);
 
     if (exitingChart) {
       exitingChart.series[i].setData(seriesData);
     } else {
+      // eslint-disable-next-line no-param-reassign
       chartInfo.highchartsOptions.series[i].data = seriesData;
     }
   }
