@@ -18,7 +18,7 @@ const config = {
 
 const queries = {
   'ab-rt-fc-price': [
-    'SELECT TOP 30 * FROM AESO_ActualForecast ORDER BY DateTime DESC',
+    'SELECT TOP 30 "DateTime", "Forecast Pool Price", "Actual Posted Pool Price" FROM AESO_ActualForecast ORDER BY DateTime DESC',
   ],
   'ab-rt-fc-demand': [
     'SELECT TOP 100 * FROM AESO_ActualForecast ORDER BY DateTime DESC',

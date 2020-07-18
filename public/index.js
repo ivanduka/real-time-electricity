@@ -1,4 +1,4 @@
-/* global Highcharts */
+/* global Highcharts, moment */
 
 // Styling
 
@@ -86,6 +86,7 @@ const globalAreaSplineOptions = {
 
 const priceTooltipOptions = {
   valuePrefix: '$',
+  xDateFormat: '%Y-%m-%d %l:%M %p',
 };
 
 const mwTooltipOptions = {
@@ -203,7 +204,6 @@ const charts = [
     divId: 'ab-rt-fc-price',
     enabled: true,
     realtimeInterval: 3600000, // every hour
-    keyCol: 0,
     seriesInfo: [
       {
         name: 'forecast',
@@ -252,7 +252,10 @@ const charts = [
         spline: globalSplineOptions,
       },
       navigation: {},
-      time: {},
+      time: {
+        timezone: 'America/Edmonton',
+        useUTC: false,
+      },
     },
   },
   {
@@ -260,7 +263,6 @@ const charts = [
     divId: 'ab-rt-fc-demand',
     enabled: true,
     realtimeInterval: 36000000, // every hour
-    keyCol: 0,
     seriesInfo: [
       {
         name: 'day-ahead forecasted ail',
@@ -317,7 +319,6 @@ const charts = [
     divId: 'ab-ht-price_hourly',
     enabled: true,
     realtimeInterval: 36000000, // every hour
-    keyCol: 0,
     seriesInfo: [
       {
         name: 'pool price',
@@ -371,7 +372,6 @@ const charts = [
     divId: 'ab-rt-demand_supply',
     enabled: true,
     realtimeInterval: 36000000, // every hour
-    keyCol: 0,
     seriesInfo: [
       // different table format here
       {
@@ -427,7 +427,6 @@ const charts = [
     divId: 'ab-rt-interchange',
     enabled: true,
     realtimeInterval: 60000, // every minute
-    keyCol: 0,
     seriesInfo: [
       // different table format here
       {
@@ -500,7 +499,6 @@ const charts = [
     divId: 'ab-rt-capability',
     enabled: true,
     realtimeInterval: 60000, // every minute
-    keyCol: 0,
     seriesInfo: [
       // different table format here
       {
@@ -593,7 +591,6 @@ const charts = [
     // Fuel (2)={WIND, BIOMASS AND OTHER, GAS, HYDRO, COAL, OTHER, TOTAL}
     // + Total Net Generation (MW) (4) *1 series per fuel type
     realtimeInterval: 60000, // every minute
-    keyCol: 0,
     seriesInfo: [
       // different table format here
       {
@@ -711,11 +708,19 @@ const getData = async (chartInfo, exitingChart) => {
     // OR all series are using the first and only query
     const rawData = dataArrays.length > 1 ? dataArrays[i] : dataArrays[0];
 
-    // Sorting array by date
-    const dataArray = rawData.sort((a, b) => b.DateTime - a.DateTime);
-
-    // Creating 2d array for Highcharts
-    const seriesData = dataArray.map((row) => [row.DateTime, row[chartInfo.seriesInfo[i].valCol]]);
+    // Parsing dates, sorting array by date, and creating 2d array for Highcharts
+    const seriesData = rawData
+      .map((row) => ({
+        ...row,
+        DateTime: moment.tz(
+          row.DateTime.slice(0, row.DateTime.length - 1),
+          chartInfo.highchartsOptions.time.timezone,
+        )
+          .toDate()
+          .getTime(),
+      }))
+      .sort((a, b) => a.DateTime - b.DateTime)
+      .map((row) => [row.DateTime, row[chartInfo.seriesInfo[i].valCol]]);
 
     if (exitingChart) {
       exitingChart.series[i].setData(seriesData);
@@ -742,8 +747,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 window.createChartForDiv = async (node) => {
-  // eslint-disable-next-line no-console
-  console.log(node.value);
   const chart = charts.find((ch) => ch.divId === node.value && ch.enabled === true);
   if (chart) {
     await createChart(chart);
