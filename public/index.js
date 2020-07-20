@@ -312,6 +312,10 @@ const charts = [
         areaspline: globalAreaSplineOptions,
       },
       navigation: {},
+      time: {
+        timezone: 'America/Edmonton',
+        useUTC: false,
+      },
     },
   },
   {
@@ -365,6 +369,10 @@ const charts = [
         spline: globalSplineOptions,
       },
       navigation: {},
+      time: {
+        timezone: 'America/Edmonton',
+        useUTC: false,
+      },
     },
   },
   {
@@ -420,6 +428,10 @@ const charts = [
         spline: globalSplineOptions,
       },
       navigation: {},
+      time: {
+        timezone: 'America/Edmonton',
+        useUTC: false,
+      },
     },
   },
   {
@@ -492,6 +504,10 @@ const charts = [
         spline: globalSplineOptions,
       },
       navigation: {},
+      time: {
+        timezone: 'America/Edmonton',
+        useUTC: false,
+      },
     },
   },
   {
@@ -582,6 +598,10 @@ const charts = [
         spline: globalSplineOptions,
       },
       navigation: {},
+      time: {
+        timezone: 'America/Edmonton',
+        useUTC: false,
+      },
     },
   },
   {
@@ -674,6 +694,10 @@ const charts = [
         spline: globalSplineOptions,
       },
       navigation: {},
+      time: {
+        timezone: 'America/Edmonton',
+        useUTC: false,
+      },
     },
   },
 ];

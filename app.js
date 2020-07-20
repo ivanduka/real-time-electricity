@@ -17,40 +17,128 @@ const config = {
 };
 
 const queries = {
-  'ab-rt-fc-price': [
-    'SELECT TOP 30 "DateTime", "Forecast Pool Price", "Actual Posted Pool Price" FROM AESO_ActualForecast ORDER BY DateTime DESC',
+  'ab-rt-fc-price': [`
+    SELECT TOP 30 "DateTime", "Forecast Pool Price", "Actual Posted Pool Price"
+    FROM AESO_ActualForecast
+    WHERE "Forecast Pool Price" IS NOT NULL
+    ORDER BY DateTime DESC;`,
   ],
-  'ab-rt-fc-demand': [
-    'SELECT TOP 100 * FROM AESO_ActualForecast ORDER BY DateTime DESC',
+  'ab-rt-fc-demand': [`
+    SELECT TOP 100 "DateTime", "Day-Ahead Forecasted AIL", "Actual AIL"
+    FROM AESO_ActualForecast
+    ORDER BY DateTime DESC;`,
   ],
-  'ab-ht-price_hourly': [
-    'SELECT TOP 100 * FROM AESO_PoolPrice ORDER BY DateTime DESC',
+  'ab-ht-price_hourly': [`
+    SELECT TOP 100 "DateTime", "Price ($)", "30Ravg ($)"
+    FROM AESO_PoolPrice
+    ORDER BY DateTime DESC;`,
   ],
-  'ab-rt-demand_supply': [
-    'SELECT TOP 30 * FROM AESO_Summary WHERE Category=\'Alberta Internal Load (AIL)\' ORDER BY DateTime DESC',
-    'SELECT TOP 30 * FROM AESO_Summary WHERE Category=\'Alberta Total Net Generation\' ORDER BY DateTime DESC',
+  'ab-rt-demand_supply': [`
+      SELECT TOP 30 "DateTime", "Value (MW)"
+      FROM AESO_Summary
+      WHERE Category='Alberta Internal Load (AIL)'
+      ORDER BY DateTime DESC;
+    `, `
+      SELECT TOP 30 "DateTime", "Value (MW)"
+      FROM AESO_Summary
+      WHERE Category='Alberta Total Net Generation'
+      ORDER BY DateTime DESC;
+    `,
   ],
-  'ab-rt-interchange': [
-    'SELECT TOP 30 * FROM AESO_Interchange WHERE Path=\'British Columbia\' ORDER BY DateTime DESC',
-    'SELECT TOP 30 * FROM AESO_Interchange WHERE Path=\'Montana\' ORDER BY DateTime DESC',
-    'SELECT TOP 30 * FROM AESO_Interchange WHERE Path=\'Saskatchewan\' ORDER BY DateTime DESC',
-    'SELECT TOP 30 * FROM AESO_Interchange WHERE Path=\'TOTAL\' ORDER BY DateTime DESC',
+  'ab-rt-interchange': [`
+      SELECT TOP 30 "DateTime", "Actual Flow (MW)"
+      FROM AESO_Interchange
+      WHERE Path='British Columbia'
+      ORDER BY DateTime DESC;
+    `, `
+      SELECT TOP 30 "DateTime", "Actual Flow (MW)"
+      FROM AESO_Interchange
+      WHERE Path='Montana'
+      ORDER BY DateTime DESC;
+    `, `
+      SELECT TOP 30 "DateTime", "Actual Flow (MW)"
+      FROM AESO_Interchange
+      WHERE Path='Saskatchewan'
+      ORDER BY DateTime DESC;
+    `, `
+      SELECT TOP 30 "DateTime", "Actual Flow (MW)"
+      FROM AESO_Interchange
+      WHERE Path='TOTAL'
+      ORDER BY DateTime DESC;`,
   ],
-  'ab-rt-capability': [
-    'SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability FROM AESO_Generation WHERE Fuel=\'WIND\' GROUP BY DateTime ORDER BY DateTime DESC',
-    'SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability FROM AESO_Generation WHERE Fuel=\'BIOMASS AND OTHER\' GROUP BY DateTime ORDER BY DateTime DESC',
-    'SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability FROM AESO_Generation WHERE Fuel=\'GAS\' GROUP BY DateTime ORDER BY DateTime DESC',
-    'SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability FROM AESO_Generation WHERE Fuel=\'HYDRO\' GROUP BY DateTime ORDER BY DateTime DESC',
-    'SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability FROM AESO_Generation WHERE Fuel=\'COAL\' GROUP BY DateTime ORDER BY DateTime DESC',
-    'SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability FROM AESO_Generation WHERE Fuel=\'TOTAL\' GROUP BY DateTime ORDER BY DateTime DESC',
+  'ab-rt-capability': [`
+      SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability
+      FROM AESO_Generation
+      WHERE Fuel='WIND'
+      GROUP BY DateTime
+      ORDER BY DateTime DESC;
+    `, `
+      SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability
+      FROM AESO_Generation
+      WHERE Fuel='BIOMASS AND OTHER'
+      GROUP BY DateTime
+      ORDER BY DateTime DESC;
+    `, `
+      SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability
+      FROM AESO_Generation
+      WHERE Fuel='GAS'
+      GROUP BY DateTime
+      ORDER BY DateTime DESC;
+    `, `
+      SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability
+      FROM AESO_Generation
+      WHERE Fuel='HYDRO'
+      GROUP BY DateTime
+      ORDER BY DateTime DESC;
+    `, `
+      SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability
+      FROM AESO_Generation
+      WHERE Fuel='COAL'
+      GROUP BY DateTime
+      ORDER BY DateTime DESC;
+    `, `
+      SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability
+      FROM AESO_Generation
+      WHERE Fuel='TOTAL'
+      GROUP BY DateTime
+      ORDER BY DateTime DESC;`,
   ],
-  'ab-rt-generation': [
-    'SELECT TOP 100 DateTime, SUM([Total Net Generation (MW)]) AS TotalMaxWindCapability FROM AESO_Generation WHERE Fuel=\'WIND\' GROUP BY DateTime ORDER BY DateTime DESC',
-    'SELECT TOP 100 DateTime, SUM([Total Net Generation (MW)]) AS TotalMaxWindCapability FROM AESO_Generation WHERE Fuel=\'BIOMASS AND OTHER\' GROUP BY DateTime ORDER BY DateTime DESC',
-    'SELECT TOP 100 DateTime, SUM([Total Net Generation (MW)]) AS TotalMaxWindCapability FROM AESO_Generation WHERE Fuel=\'GAS\' GROUP BY DateTime ORDER BY DateTime DESC',
-    'SELECT TOP 100 DateTime, SUM([Total Net Generation (MW)]) AS TotalMaxWindCapability FROM AESO_Generation WHERE Fuel=\'HYDRO\' GROUP BY DateTime ORDER BY DateTime DESC',
-    'SELECT TOP 100 DateTime, SUM([Total Net Generation (MW)]) AS TotalMaxWindCapability FROM AESO_Generation WHERE Fuel=\'COAL\' GROUP BY DateTime ORDER BY DateTime DESC',
-    'SELECT TOP 100 DateTime, SUM([Total Net Generation (MW)]) AS TotalMaxWindCapability FROM AESO_Generation WHERE Fuel=\'TOTAL\' GROUP BY DateTime ORDER BY DateTime DESC',
+  'ab-rt-generation': [`
+        SELECT TOP 100 DateTime, SUM([Total Net Generation (MW)]) AS TotalMaxWindCapability
+        FROM AESO_Generation
+        WHERE Fuel='WIND'
+        GROUP BY DateTime
+        ORDER BY DateTime DESC;
+    `, `
+        SELECT TOP 100 DateTime, SUM([Total Net Generation (MW)]) AS TotalMaxWindCapability
+        FROM AESO_Generation
+        WHERE Fuel='BIOMASS AND OTHER'
+        GROUP BY DateTime
+        ORDER BY DateTime DESC;
+    `, `
+        SELECT TOP 100 DateTime, SUM([Total Net Generation (MW)]) AS TotalMaxWindCapability
+        FROM AESO_Generation WHERE Fuel='GAS'
+        GROUP BY DateTime
+        ORDER BY DateTime DESC;
+    `, `
+        SELECT TOP 100 DateTime, SUM([Total Net Generation (MW)]) AS TotalMaxWindCapability
+        FROM AESO_Generation
+        WHERE Fuel='HYDRO'
+        GROUP BY DateTime
+        ORDER BY DateTime DESC;
+    `, `
+        SELECT TOP 100 DateTime, SUM([Total Net Generation (MW)]) AS TotalMaxWindCapability
+        FROM AESO_Generation
+        WHERE Fuel='COAL'
+        GROUP BY DateTime
+        ORDER BY DateTime DESC;
+    `, `
+        SELECT TOP 100 DateTime, SUM([Total Net Generation (MW)]) AS TotalMaxWindCapability
+        FROM AESO_Generation
+        WHERE Fuel='TOTAL'
+        GROUP BY DateTime
+        ORDER BY DateTime DESC;
+    `,
   ],
 };
 
