@@ -3,12 +3,8 @@ const cors = require('cors');
 const path = require('path');
 const bodyParser = require('body-parser');
 const sql = require('mssql/msnodesqlv8');
-const { EventEmitter } = require('events');
 require('dotenv').config();
-
-const app = express();
-app.use(cors());
-app.use('/', express.static('public'));
+const rateLimit = require('express-rate-limit');
 
 const config = {
   database: process.env.DB_NAME,
@@ -18,40 +14,10 @@ const config = {
   },
 };
 
-class Lock {
-  constructor() {
-    this.locked = false;
-    this.ee = new EventEmitter();
-  }
-
-  acquire() {
-    return new Promise((resolve) => {
-      // If nobody has the lock, take it and resolve immediately
-      if (!this.locked) {
-        // Safe because JS doesn't interrupt you on synchronous operations,
-        // so no need for compare-and-swap or anything like that.
-        this.locked = true;
-        return resolve();
-      }
-
-      // Otherwise, wait until somebody releases the lock and try again
-      const tryAcquire = () => {
-        if (!this.locked) {
-          this.locked = true;
-          this.ee.removeListener('release', tryAcquire);
-          resolve();
-        }
-      };
-      return this.ee.on('release', tryAcquire);
-    });
-  }
-
-  release() {
-    // Release the lock immediately
-    this.locked = false;
-    setImmediate(() => this.ee.emit('release'));
-  }
-}
+const apiLimiter = rateLimit({
+  windowMs: process.env.RATE_LIMITING_WINDOW_IN_SECONDS * 1000, // in milliseconds
+  max: process.env.RATE_LIMITING_LIMIT_PER_WINDOW, // requests per windowMs
+});
 
 const queries = {
   'ab-rt-fc-price': [
@@ -198,50 +164,30 @@ const queries = {
   ],
 };
 
-const dataStore = Object.keys(queries)
-  .reduce((obj, key) => ({
-    ...obj,
-    [key]: {
-      lock: new Lock(),
-      value: null,
-      date: Date.now(),
-    },
-  }), {});
+const dataStore = { };
 
-setInterval(() => {
-  // eslint-disable-next-line no-restricted-syntax, guard-for-in
-  for (const endPoint in dataStore) {
-    const { value, date } = dataStore[endPoint];
-    if (value && Date.now() - date >= process.env.DB_UPDATE_INTERVAL * 1000) {
-      dataStore[endPoint].value = null;
-    }
-  }
-}, process.env.DB_UPDATE_INTERVAL * 1000);
-
-const getData = async (type) => {
-  // Checking if the data is in cache
-  let { value } = dataStore[type];
-  if (!value) {
-    // If the data is not in cache, obtaining "lock"
-    const { lock } = dataStore[type];
-    await lock.acquire();
-
-    // Checking again if other competing request already populated the cache
-    value = dataStore[type].value;
-
-    if (!value) {
-      // Populating the cache and returning the new value
-      await sql.connect(config);
-      const promises = queries[type].map((q) => sql.query(q));
-      const results = await Promise.all(promises);
-      value = results.map((result) => result.recordset);
-      dataStore[type].value = value;
-      dataStore[type].date = Date.now();
-      lock.release();
-    }
-  }
-  return value;
+const fetchData = async (type) => {
+  await sql.connect(config);
+  const promises = queries[type].map((q) => sql.query(q));
+  const results = await Promise.all(promises);
+  return results.map((result) => result.recordset);
 };
+
+const populateDataStore = async () => {
+  const promises = { };
+  // eslint-disable-next-line no-restricted-syntax, guard-for-in
+  for (const type in queries) {
+    promises[type] = fetchData(type);
+  }
+
+  // eslint-disable-next-line no-restricted-syntax, guard-for-in
+  for (const type in promises) {
+    // eslint-disable-next-line no-await-in-loop
+    dataStore[type] = await promises[type]; // waiting for promises, so it's OK to await here
+  }
+};
+
+setInterval(populateDataStore, process.env.DB_UPDATE_INTERVAL_IN_SECONDS * 1000);
 
 const apiController = async (req, res, next) => {
   try {
@@ -249,7 +195,7 @@ const apiController = async (req, res, next) => {
       next(new Error(`wrong parameter: ${req.params.type}`));
       return;
     }
-    const result = await getData(req.params.type);
+    const result = dataStore[req.params.type];
     res.json(result);
   } catch (error) {
     next(error);
@@ -268,11 +214,19 @@ function errorHandler(err, req, res, next) {
   console.log(err);
 }
 
+const app = express();
+app.disable('etag');
+
+app.use(cors());
+app.get('/api/', (req, res, next) => apiLimiter(req, res, next));
+app.get('/', express.static('public'));
 app.use(bodyParser.json());
 app.get('/api/:type', (req, res, next) => apiController(req, res, next));
 app.get('/', express.static(path.join(__dirname, 'public')));
 app.use((err, req, res, next) => errorHandler(err, req, res, next));
 
-const port = 8898;
-// eslint-disable-next-line no-console
-app.listen(port, () => console.log(`Listening on port ${port}...`));
+(async () => {
+  await populateDataStore();
+  // eslint-disable-next-line no-console
+  app.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}...`));
+})();
