@@ -722,7 +722,7 @@ const fetchDataFromDB = async (type) => {
   return data;
 };
 
-const getData = async (chartInfo, exitingChart) => {
+const getData = async (chartInfo, existingChart) => {
   // Getting data from the DB
   const dataArrays = await fetchDataFromDB(chartInfo.divId);
 
@@ -746,8 +746,8 @@ const getData = async (chartInfo, exitingChart) => {
       .sort((a, b) => a.DateTime - b.DateTime)
       .map((row) => [row.DateTime, row[chartInfo.seriesInfo[i].valCol]]);
 
-    if (exitingChart) {
-      exitingChart.series[i].setData(seriesData);
+    if (existingChart) {
+      existingChart.series[i].setData(seriesData);
     } else {
       // eslint-disable-next-line no-param-reassign
       chartInfo.highchartsOptions.series[i].data = seriesData;
