@@ -32,6 +32,19 @@ const colors = {
   },
 };
 
+const mwhTooltipOptions = {
+  valueSuffix: ' MW',
+};
+
+const globalYAxisOptionsMWh = {
+  title: {
+    text: 'MWh',
+  },
+  minorGridLineWidth: 0,
+  gridLineWidth: 0,
+  alternateGridColor: null,
+};
+
 const lineWidths = {
   forecast: 2,
   regular: 2,
@@ -199,8 +212,7 @@ const setGlobalChartTheme = () => {
 // Charts definitions
 
 const charts = [
-  {
-    // AB: PRICE Realtime, Forecast
+  { // AB: PRICE Realtime, Forecast
     divId: 'ab-rt-fc-price',
     enabled: true,
     realtimeInterval: 3600000, // every hour
@@ -258,8 +270,7 @@ const charts = [
       },
     },
   },
-  {
-    // AB: DEMAND Realtime, Forecast
+  { // AB: DEMAND Realtime, Forecast
     divId: 'ab-rt-fc-demand',
     enabled: true,
     realtimeInterval: 36000000, // every hour
@@ -318,8 +329,7 @@ const charts = [
       },
     },
   },
-  {
-    // AB: PRICE Historical
+  { // AB: PRICE Historical
     divId: 'ab-ht-price_hourly',
     enabled: true,
     realtimeInterval: 36000000, // every hour
@@ -375,8 +385,7 @@ const charts = [
       },
     },
   },
-  {
-    // AB: DEMAND and SUPPLY
+  { // AB: DEMAND and SUPPLY
     divId: 'ab-rt-demand_supply',
     enabled: true,
     realtimeInterval: 36000000, // every hour
@@ -434,8 +443,7 @@ const charts = [
       },
     },
   },
-  {
-    // AB: INTERCHANGE Real time electricity trade
+  { // AB: INTERCHANGE Real time electricity trade
     divId: 'ab-rt-interchange',
     enabled: true,
     realtimeInterval: 60000, // every minute
@@ -510,8 +518,7 @@ const charts = [
       },
     },
   },
-  {
-    // AB: SUPPLY Max generation capability by energy group
+  { // AB: SUPPLY Max generation capability by energy group
     divId: 'ab-rt-capability',
     enabled: true,
     realtimeInterval: 60000, // every minute
@@ -604,8 +611,7 @@ const charts = [
       },
     },
   },
-  {
-    // AB: SUPPLY Total net generation by energy group
+  { // AB: SUPPLY Total net generation by energy group
     divId: 'ab-rt-generation',
     enabled: true,
     // Fuel (2)={WIND, BIOMASS AND OTHER, GAS, HYDRO, COAL, OTHER, TOTAL}
@@ -696,6 +702,1016 @@ const charts = [
       navigation: {},
       time: {
         timezone: 'America/Edmonton',
+        useUTC: false,
+      },
+    },
+  },
+  { // ON: DEMAND
+    divId: 'on-rt-demand',
+    enabled: true,
+    realtimeInterval: 60000, // every hour
+    seriesInfo: [
+      {
+        name: 'Total Energy',
+        valCol: 'Total Energy (MW)',
+      },
+      {
+        name: 'Total Loss',
+        valCol: 'Total Loss (MW)',
+      },
+      {
+        name: 'Total Load',
+        valCol: 'Total Load (MW)',
+      },
+      {
+        name: 'Ontario demand',
+        valCol: 'ONTARIO DEMAND (MW)',
+      },
+    ],
+    highchartsOptions: {
+      chart: {
+        type: 'areaspline',
+      },
+      series: [
+        {
+          name: 'Total Energy',
+          color: colors.demand.ultralight,
+          data: [],
+        },
+        {
+          name: 'Total Loss',
+          color: colors.demand.light,
+          data: [],
+        },
+        {
+          name: 'Total Load',
+          color: colors.demand.main,
+          data: [],
+        },
+        {
+          name: 'Ontario Demand',
+          color: colors.demand.dark,
+          data: [],
+        },
+
+      ],
+      title: {
+        text: 'Electricity demand',
+      },
+      subtitle: {
+        text: "Source: <a href='http://reports.ieso.ca/public/RealtimeConstTotals/PUB_RealtimeConstTotals.xml'>IESO</a>",
+        useHTML: true,
+      },
+      caption: {
+        text: "Description:This graphs contains real time data on Ontario's electricity demand and supply. Total energy is equal to the sum of total loss and total load. Ontario demand is equal to total load minus trade.",
+      },
+      xAxis: globalXAxisOptionsDateTime,
+      yAxis: {
+        title: {
+          text: 'Load (MW)',
+        },
+      },
+      tooltip: mwTooltipOptions,
+      plotOptions: {
+        areaspline: globalAreaSplineOptions,
+      },
+      navigation: {
+      },
+      time: {
+        timezone: 'America/Toronto',
+        useUTC: false,
+      },
+    },
+  },
+  { // ON: SUPPLY capacity
+    divId: 'on-rt-supply-cap',
+    enabled: true,
+    realtimeInterval: 60000, // every minute
+    seriesInfo: [ // different table format here
+      {
+        name: 'Biofuel',
+        valCol: 'TotalCapability',
+      },
+      {
+        name: 'Gas',
+        valCol: 'TotalCapability',
+      },
+      {
+        name: 'Hydro',
+        valCol: 'TotalCapability',
+      },
+      {
+        name: 'Nuclear',
+        valCol: 'TotalCapability',
+      },
+      {
+        name: 'Solar',
+        valCol: 'TotalCapability',
+      },
+      {
+        name: 'Wind',
+        valCol: 'TotalCapability',
+      },
+    ],
+    highchartsOptions: {
+      chart: {
+        type: 'spline',
+      },
+      series: [
+        {
+          name: 'Biofuel',
+          color: colors.supply.series[0],
+          data: [],
+        },
+        {
+          name: 'Gas',
+          color: colors.supply.series[1],
+          data: [],
+        },
+        {
+          name: 'Hydro',
+          color: colors.supply.series[2],
+          data: [],
+        },
+        {
+          name: 'Nuclear',
+          color: colors.supply.series[3],
+          data: [],
+        },
+        {
+          name: 'Solar',
+          color: colors.supply.series[4],
+          data: [],
+        },
+        {
+          name: 'Wind',
+          color: colors.supply.series[6],
+          data: [],
+        },
+      ],
+      title: {
+        text: 'Electricity generation capacity by fuel type',
+      },
+      subtitle: {
+        text: "Source: <a href='http://reports.ieso.ca/public/GenOutputCapability/PUB_GenOutputCapability.xml'>IESO</a>",
+        useHTML: true,
+      },
+      caption: {
+        text: 'Description: This graph contains real time data on electricity generation capacity, by fuel type',
+      },
+      xAxis: globalXAxisOptionsDateTime,
+      yAxis: globalYAxisOptionsMW,
+      tooltip: mwTooltipOptions,
+
+      plotOptions: {
+        spline: globalSplineOptions,
+      },
+      navigation: {
+      },
+      time: {
+        timezone: 'America/Toronto',
+        useUTC: false,
+      },
+    },
+  },
+  { // ON: SUPPLY output
+    divId: 'on-rt-supply-out',
+    enabled: true,
+    realtimeInterval: 60000, // every minute
+    seriesInfo: [ // different table format here
+      {
+        name: 'Biofuel',
+        valCol: 'TotalOutput',
+      },
+      {
+        name: 'Gas',
+        valCol: 'TotalOutput',
+      },
+      {
+        name: 'Hydro',
+        valCol: 'TotalOutput',
+      },
+      {
+        name: 'Nuclear',
+        valCol: 'TotalOutput',
+      },
+      {
+        name: 'Solar',
+        valCol: 'TotalOutput',
+      },
+      {
+        name: 'Wind',
+        valCol: 'TotalOutput',
+      },
+    ],
+    highchartsOptions: {
+      chart: {
+        type: 'spline',
+      },
+      series: [
+        {
+          name: 'Biofuel',
+          color: colors.supply.series[0],
+          data: [],
+        },
+        {
+          name: 'Gas',
+          color: colors.supply.series[1],
+          data: [],
+        },
+        {
+          name: 'Hydro',
+          color: colors.supply.series[2],
+          data: [],
+        },
+        {
+          name: 'Nuclear',
+          color: colors.supply.series[3],
+          data: [],
+        },
+        {
+          name: 'Solar',
+          color: colors.supply.series[4],
+          data: [],
+        },
+        {
+          name: 'Wind',
+          color: colors.supply.series[6],
+          data: [],
+        },
+      ],
+      title: {
+        text: 'Electricity generation (output) by fuel type',
+      },
+      subtitle: {
+        text: "Source: <a href='http://reports.ieso.ca/public/GenOutputCapability/PUB_GenOutputCapability.xml'>IESO</a>",
+        useHTML: true,
+      },
+      caption: {
+        text: 'Description: This graph contains real time data on electricity generation capacity, by fuel type',
+      },
+      xAxis: globalXAxisOptionsDateTime,
+      yAxis: globalYAxisOptionsMW,
+      tooltip: mwTooltipOptions,
+
+      plotOptions: {
+        spline: globalSplineOptions,
+      },
+      navigation: {
+      },
+      time: {
+        timezone: 'America/Toronto',
+        useUTC: false,
+      },
+    },
+  },
+  { // ON: INTERCHANGE actual
+    divId: 'on-rt-interchange-actual',
+    enabled: true,
+    realtimeInterval: 60000, // every minute
+    seriesInfo: [ // different table format here
+      {
+        name: 'Manitoba',
+        valCol: 'Flow (MWh)',
+      },
+      {
+        name: 'Manitoba SK',
+        valCol: 'Flow (MWh)',
+      },
+      {
+        name: 'Michigan',
+        valCol: 'Flow (MWh)',
+      },
+      {
+        name: 'Minnesota',
+        valCol: 'Flow (MWh)',
+      },
+      {
+        name: 'New York',
+        valCol: 'Flow (MWh)',
+      },
+      {
+        name: 'Total',
+        valCol: 'Flow (MWh)',
+      },
+    ],
+    highchartsOptions: {
+      chart: {
+        type: 'spline',
+      },
+      series: [
+        {
+          name: 'Manitoba',
+          color: colors.supply.series[0],
+          data: [],
+        },
+        {
+          name: 'Manitoba SK',
+          color: colors.supply.series[1],
+          data: [],
+        },
+        {
+          name: 'Michigan',
+          color: colors.supply.series[2],
+          data: [],
+        },
+        {
+          name: 'Minnesota',
+          color: colors.supply.series[3],
+          data: [],
+        },
+        {
+          name: 'New York',
+          color: colors.supply.series[4],
+          data: [],
+        },
+        {
+          name: 'Total',
+          color: colors.supply.series[6],
+          data: [],
+        },
+      ],
+      title: {
+        text: 'Actual electricity trade flows',
+      },
+      subtitle: {
+        text: "Source: <a href='http://www.ieso.ca/en/Power-Data/This-Hours-Data'>IESO</a>",
+        useHTML: true,
+      },
+      caption: {
+        text: 'Description: This graph contains real time data on electricity trade',
+      },
+      xAxis: globalXAxisOptionsDateTime,
+      yAxis: globalYAxisOptionsMWh,
+      tooltip: mwhTooltipOptions,
+
+      plotOptions: {
+        spline: globalSplineOptions,
+      },
+      navigation: {
+      },
+      time: {
+        timezone: 'America/Toronto',
+        useUTC: false,
+      },
+    },
+  },
+  { // ON: INTERCHANGE scheduled
+    divId: 'on-rt-interchange-sched',
+    enabled: true,
+    realtimeInterval: 60000, // every minute
+    seriesInfo: [ // different table format here
+      {
+        name: 'Exports',
+        valCol: 'Exports (MWh)',
+      },
+      {
+        name: 'Imports',
+        valCol: 'Imports (MWh)',
+      },
+    ],
+    highchartsOptions: {
+      chart: {
+        type: 'spline',
+      },
+      series: [
+        {
+          name: 'Exports',
+          color: colors.supply.series[0],
+          data: [],
+        },
+        {
+          name: 'Imports',
+          color: colors.supply.series[1],
+          data: [],
+        },
+      ],
+      title: {
+        text: 'Actual electricity trade flows',
+      },
+      subtitle: {
+        text: "Source: <a href='http://www.ieso.ca/en/Power-Data/This-Hours-Data'>IESO</a>",
+        useHTML: true,
+      },
+      caption: {
+        text: 'Description: This graph contains real time data on scheduled electricity trade',
+      },
+      xAxis: globalXAxisOptionsDateTime,
+      yAxis: globalYAxisOptionsMWh,
+      tooltip: mwhTooltipOptions,
+
+      plotOptions: {
+        spline: globalSplineOptions,
+      },
+      navigation: {
+      },
+      time: {
+        timezone: 'America/Toronto',
+        useUTC: false,
+      },
+    },
+  },
+  { // ON: INTERCHANGE scheduled
+    divId: 'on-rt-interchange-sched-v2',
+    enabled: true,
+    realtimeInterval: 60000, // every minute
+    seriesInfo: [ // different table format here
+      {
+        name: 'Manitoba',
+        valCol: 'Exports (MWh)',
+      },
+      {
+        name: 'Manitoba SK',
+        valCol: 'Exports (MWh)',
+      },
+      {
+        name: 'Michigan',
+        valCol: 'Exports (MWh)',
+      },
+      {
+        name: 'Minnesota',
+        valCol: 'Exports (MWh)',
+      },
+      {
+        name: 'New York',
+        valCol: 'Exports (MWh)',
+      },
+      {
+        name: 'Total',
+        valCol: 'Exports (MWh)',
+      },
+    ],
+    highchartsOptions: {
+      chart: {
+        type: 'spline',
+      },
+      series: [
+        {
+          name: 'Manitoba',
+          color: colors.supply.series[0],
+          data: [],
+        },
+        {
+          name: 'Manitoba SK',
+          color: colors.supply.series[1],
+          data: [],
+        },
+        {
+          name: 'Michigan',
+          color: colors.supply.series[2],
+          data: [],
+        },
+        {
+          name: 'Minnesota',
+          color: colors.supply.series[3],
+          data: [],
+        },
+        {
+          name: 'New York',
+          color: colors.supply.series[4],
+          data: [],
+        },
+        {
+          name: 'Total',
+          color: colors.supply.series[6],
+          data: [],
+        },
+      ],
+      title: {
+        text: 'Actual electricity trade flows',
+      },
+      subtitle: {
+        text: "Source: <a href='http://www.ieso.ca/en/Power-Data/This-Hours-Data'>IESO</a>",
+        useHTML: true,
+      },
+      caption: {
+        text: 'Description: This graph contains real time data on scheduled electricity trade',
+      },
+      xAxis: globalXAxisOptionsDateTime,
+      yAxis: globalYAxisOptionsMWh,
+      tooltip: mwhTooltipOptions,
+
+      plotOptions: {
+        spline: globalSplineOptions,
+      },
+      navigation: {
+      },
+      time: {
+        timezone: 'America/Toronto',
+        useUTC: false,
+      },
+    },
+  },
+  { // ON: PRICE
+    divId: 'on-rt-price',
+    enabled: false,
+    realtimeInterval: 3600000, // every hour
+    seriesInfo: [
+      {
+        name: 'Price',
+        valCol: 'HOEP ($/MWh)',
+      },
+    ],
+    highchartsOptions: {
+      chart: {
+        type: 'spline',
+      },
+      series: [{
+        name: 'Electricity Price',
+        color: colors.price.light,
+        dashStyle: 'shortdot',
+        data: [],
+      }],
+
+      title: {
+        text: 'Electricity Price',
+      },
+      subtitle: {
+        text: "Source: <a href='http://reports.ieso.ca/public/DispUnconsHOEP/>IESO</a>",
+        useHTML: true,
+      },
+      caption: {
+        text: "Description: This graph contains real time data on Ontario's hourly electricity price (HOEP).",
+      },
+      xAxis: globalXAxisOptionsDateTime,
+      yAxis: globalYAxisOptionsPrice,
+
+      tooltip: priceTooltipOptions,
+
+      plotOptions: {
+        spline: globalSplineOptions,
+      },
+      navigation: {
+      },
+      time: {
+        timezone: 'America/Toronto',
+        useUTC: false,
+      },
+    },
+  },
+  { // NS: DEMAND
+    divId: 'ns-rt-demand',
+    enabled: true,
+    realtimeInterval: 36000000, // every hour
+    seriesInfo: [ // different table format here
+      {
+        name: 'Net Load',
+        valCol: 'Net Load',
+      },
+      {
+        name: 'Wind Generation',
+        valCol: 'Wind Generation',
+      },
+    ],
+    highchartsOptions: {
+      chart: {
+        type: 'area',
+      },
+      series: [
+        {
+          name: 'Net Load',
+          color: colors.demand.main,
+          data: [],
+        },
+        {
+          name: 'Wind Generation',
+          color: colors.supply.light,
+          dashStyle: 'shortdash',
+          data: [],
+        },
+      ],
+      title: {
+        text: 'Net load and wind generation',
+      },
+      subtitle: {
+        text: "Source: <a href='https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml'>NSPower</a>",
+        useHTML: true,
+      },
+      caption: {
+        text: "Description: This graph contains real time data on Nova Scotia's net electricity load and wind generation.",
+      },
+      xAxis: globalXAxisOptionsDateTime,
+      yAxis: globalYAxisOptionsMW,
+      tooltip: mwTooltipOptions,
+
+      plotOptions: {
+        spline: globalSplineOptions,
+      },
+      navigation: {
+      },
+      time: {
+        timezone: 'America/Halifax',
+        useUTC: false,
+      },
+    },
+  },
+  { // NS: INTERCHANGE
+    divId: 'ns-rt-interchange',
+    enabled: false,
+    realtimeInterval: 36000000, // every hour
+    seriesInfo: [ // different table format here
+      {
+        name: 'Highlands Export?',
+        valCol: 'Highlands Export',
+      },
+      {
+        name: 'East End Export (at Sydney)?',
+        valCol: 'East End Export (at Sydney)',
+      },
+      {
+        name: 'East End Export (at East Bay)?',
+        valCol: 'East End Export (at East Bay)',
+      },
+      {
+        name: 'Cape Breton Export?',
+        valCol: 'Cape Breton Export',
+      },
+      {
+        name: 'Onslow Import?',
+        valCol: 'Onslow Import',
+      },
+      {
+        name: 'NS Export?',
+        valCol: 'NS Export',
+      },
+      {
+        name: 'Onslow South?',
+        valCol: 'Onslow South',
+      },
+      {
+        name: 'Flow Into Metro?',
+        valCol: 'Flow Into Metro',
+      },
+      {
+        name: 'Western Import?',
+        valCol: 'Western Import',
+      },
+      {
+        name: 'Valley Import?',
+        valCol: 'Valley Import',
+      },
+      {
+        name: 'Maritime Link Import?',
+        valCol: 'Maritime Link Import',
+      },
+    ],
+    highchartsOptions: {
+      chart: {
+        type: 'spline',
+      },
+      series: [
+        {
+          name: '',
+          color: colors.supply.series[0],
+          data: [],
+        },
+        {
+          name: '',
+          color: colors.supply.series[1],
+          data: [],
+        },
+        {
+          name: '',
+          color: colors.supply.series[2],
+          data: [],
+        },
+        {
+          name: '',
+          color: colors.supply.series[3],
+          data: [],
+        },
+        {
+          name: '',
+          color: colors.supply.series[4],
+          data: [],
+        },
+        {
+          name: '',
+          color: colors.supply.series[5],
+          data: [],
+        },
+        {
+          name: '',
+          color: colors.supply.series[6],
+          data: [],
+        },
+        {
+          name: '',
+          color: colors.supply.series[0],
+          data: [],
+        },
+        {
+          name: '',
+          color: colors.supply.series[1],
+          data: [],
+        },
+        {
+          name: '',
+          color: colors.supply.series[2],
+          data: [],
+        },
+        {
+          name: '',
+          color: colors.supply.series[3],
+          data: [],
+        },
+      ],
+      title: {
+        text: 'Trade flows',
+      },
+      subtitle: {
+        text: "Source: <a href='https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml'>NSPower</a>",
+        useHTML: true,
+      },
+      caption: {
+        text: "Description: This graph contains real time data on Nova Scotia's electricity trade flows",
+      },
+      xAxis: globalXAxisOptionsDateTime,
+      yAxis: globalYAxisOptionsMW,
+      tooltip: mwTooltipOptions,
+
+      plotOptions: {
+        spline: globalSplineOptions,
+      },
+      navigation: {
+      },
+      time: {
+        timezone: 'America/Halifax',
+        useUTC: false,
+      },
+    },
+  },
+  { // NB: DEMAND
+    divId: 'nb-rt-demand',
+    enabled: true,
+    realtimeInterval: 36000000, // every hour
+    seriesInfo: [ // different table format here
+      {
+        name: 'Load',
+        valCol: 'NB Load',
+      },
+      {
+        name: 'Demand',
+        valCol: 'NB Demand',
+      },
+    ],
+    highchartsOptions: {
+      chart: {
+        type: 'spline',
+      },
+      series: [
+        {
+          name: 'Net Load',
+          color: colors.demand.main,
+          data: [],
+        },
+        {
+          name: 'Demand',
+          color: colors.demand.light,
+          dashStyle: 'shortdash',
+          data: [],
+        },
+      ],
+      title: {
+        text: 'Provincial electricity load and demand',
+      },
+      subtitle: {
+        text: "Source: <a href='https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml'>NSPower</a>",
+        useHTML: true,
+      },
+      caption: {
+        text: "Description: This graphs contains real time data on New Brunswick's electricity load and demand.",
+      },
+      xAxis: globalXAxisOptionsDateTime,
+      yAxis: globalYAxisOptionsMW,
+      tooltip: mwTooltipOptions,
+
+      plotOptions: {
+        spline: globalSplineOptions,
+      },
+      navigation: {
+      },
+      time: {
+        timezone: 'America/Halifax',
+        useUTC: false,
+      },
+    },
+  },
+  { // NB: INTERCHANGE
+    divId: 'nb-rt-interchange',
+    enabled: false,
+    realtimeInterval: 36000000, // every hour
+    seriesInfo: [ // different table format here
+      {
+        name: 'East End Export (at Sydney)?',
+        valCol: 'East End Export (at Sydney)',
+      },
+      {
+        name: 'East End Export (at East Bay)?',
+        valCol: 'East End Export (at East Bay)',
+      },
+      {
+        name: 'Cape Breton Export?',
+        valCol: 'Cape Breton Export',
+      },
+      {
+        name: 'Onslow Import?',
+        valCol: 'Onslow Import',
+      },
+      {
+        name: 'NS Export?',
+        valCol: 'NS Export',
+      },
+      {
+        name: 'Onslow South?',
+        valCol: 'Onslow South',
+      },
+    ],
+    highchartsOptions: {
+      chart: {
+        type: 'spline',
+      },
+      series: [
+        {
+          name: '',
+          color: colors.supply.series[0],
+          data: [],
+        },
+        {
+          name: '',
+          color: colors.supply.series[1],
+          data: [],
+        },
+        {
+          name: '',
+          color: colors.supply.series[2],
+          data: [],
+        },
+        {
+          name: '',
+          color: colors.supply.series[3],
+          data: [],
+        },
+        {
+          name: '',
+          color: colors.supply.series[4],
+          data: [],
+        },
+        {
+          name: '',
+          color: colors.supply.series[5],
+          data: [],
+        },
+      ],
+      title: {
+        text: 'Trade flows',
+      },
+      subtitle: {
+        text: "Source: <a href='https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml'>NSPower</a>",
+        useHTML: true,
+      },
+      caption: {
+        text: "Description: This graph contains real time data on Nova Scotia's electricity trade flows",
+      },
+      xAxis: globalXAxisOptionsDateTime,
+      yAxis: globalYAxisOptionsMW,
+      tooltip: mwTooltipOptions,
+
+      plotOptions: {
+        spline: globalSplineOptions,
+      },
+      navigation: {
+      },
+      time: {
+        timezone: 'America/Halifax',
+        useUTC: false,
+      },
+    },
+  },
+  { // NF: SUPPLY
+    divId: 'nl-rt-supply',
+    enabled: true,
+    realtimeInterval: 36000000, // every hour
+    seriesInfo: [ // different table format here
+      {
+        name: 'Generation',
+        valCol: 'Generation (MW)',
+      },
+    ],
+    highchartsOptions: {
+      chart: {
+        type: 'spline',
+      },
+      series: [
+        {
+          name: 'Generation',
+          color: colors.supply.main,
+          data: [],
+        },
+      ],
+      title: {
+        text: 'Electricity generation',
+      },
+      subtitle: {
+        text: "Source: <a href='https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml'>NSPower</a>",
+        useHTML: true,
+      },
+      caption: {
+        text: "Description: This graphs contains real time data on New Brunswick's electricity load and demand.",
+      },
+      xAxis: globalXAxisOptionsDateTime,
+      yAxis: globalYAxisOptionsMW,
+      tooltip: mwTooltipOptions,
+
+      plotOptions: {
+        spline: globalSplineOptions,
+      },
+      navigation: {
+      },
+      time: {
+        timezone: 'America/St_Johns',
+        useUTC: false,
+      },
+    },
+  },
+  { // NF: PEI: SUPPLY DEMAND
+    divId: 'pei-rt-supply-demand',
+    enabled: true,
+    realtimeInterval: 36000000, // every hour
+    seriesInfo: [ // different table format here
+      {
+        name: 'Total Load (MW)',
+        valCol: 'Total Load (MW)',
+      },
+      {
+        name: 'Wind Power Used',
+        valCol: 'Wind Power Used (MW)',
+      },
+      {
+        name: 'Total Wind Generation',
+        valCol: 'Total Wind Generation (MW)',
+      },
+      {
+        name: 'Wind Power Exported',
+        valCol: 'Wind Power Exported (MW)',
+      },
+      {
+        name: 'Total Fossil Fuel Generation',
+        valCol: 'Total Fossil Fuel Generation (MW)',
+      },
+    ],
+    highchartsOptions: {
+      chart: {
+        type: 'spline',
+      },
+      series: [
+        {
+          name: 'Generation',
+          color: colors.supply.main,
+          data: [],
+        },
+        {
+          name: 'Wind Power Used',
+          color: colors.supply.main,
+          data: [],
+        },
+        {
+          name: 'Total Wind Generation',
+          color: colors.supply.main,
+          data: [],
+        },
+        {
+          name: 'Wind Power Exported',
+          color: colors.supply.main,
+          data: [],
+        },
+        {
+          name: 'Total Fossil Fuel Generation',
+          color: colors.supply.main,
+          data: [],
+        },
+      ],
+      title: {
+        text: 'PEI Load, generation and trade',
+      },
+      subtitle: {
+        text: "Source: <a href='https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml'>NSPower</a>",
+        useHTML: true,
+      },
+      caption: {
+        text: "Description: This graphs contains real time data on New Brunswick's electricity load and demand.",
+      },
+      xAxis: globalXAxisOptionsDateTime,
+      yAxis: globalYAxisOptionsMW,
+      tooltip: mwTooltipOptions,
+
+      plotOptions: {
+        spline: globalSplineOptions,
+      },
+      navigation: {
+      },
+      time: {
+        timezone: 'America/St_Johns',
         useUTC: false,
       },
     },

@@ -140,6 +140,77 @@ const queries = {
         GROUP BY DateTime
         ORDER BY DateTime DESC;
     `],
+  'on-rt-demand': [`
+    SELECT TOP 30 DateTime, "Total Energy (MW)", "Total Loss (MW)", "Total Load (MW)", "ONTARIO DEMAND (MW)"
+    FROM IESO_Summary
+    ORDER BY DateTime DESC;
+  `],
+  'on-rt-supply-cap': [
+    "SELECT TOP 100 DateTime, SUM([Capability (MW)]) AS TotalCapability FROM IESO_Generators WHERE Fuel='BIOFUEL' GROUP BY DateTime ORDER BY DateTime DESC",
+    "SELECT TOP 100 DateTime, SUM([Capability (MW)]) AS TotalCapability FROM IESO_Generators WHERE Fuel='GAS' GROUP BY DateTime ORDER BY DateTime DESC",
+    "SELECT TOP 100 DateTime, SUM([Capability (MW)]) AS TotalCapability FROM IESO_Generators WHERE Fuel='HYDRO' GROUP BY DateTime ORDER BY DateTime DESC",
+    "SELECT TOP 100 DateTime, SUM([Capability (MW)]) AS TotalCapability FROM IESO_Generators WHERE Fuel='NUCLEAR' GROUP BY DateTime ORDER BY DateTime DESC",
+    "SELECT TOP 100 DateTime, SUM([Capability (MW)]) AS TotalCapability FROM IESO_Generators WHERE Fuel='SOLAR' GROUP BY DateTime ORDER BY DateTime DESC",
+    "SELECT TOP 100 DateTime, SUM([Capability (MW)]) AS TotalCapability FROM IESO_Generators WHERE Fuel='WIND' GROUP BY DateTime ORDER BY DateTime DESC",
+  ],
+  'on-rt-supply-out': [
+    "SELECT TOP 100 DateTime, SUM([Output (MW)]) AS TotalOutput FROM IESO_Generators WHERE Fuel='BIOFUEL' GROUP BY DateTime ORDER BY DateTime DESC",
+    "SELECT TOP 100 DateTime, SUM([Output (MW)]) AS TotalOutput FROM IESO_Generators WHERE Fuel='GAS' GROUP BY DateTime ORDER BY DateTime DESC",
+    "SELECT TOP 100 DateTime, SUM([Output (MW)]) AS TotalOutput FROM IESO_Generators WHERE Fuel='HYDRO' GROUP BY DateTime ORDER BY DateTime DESC",
+    "SELECT TOP 100 DateTime, SUM([Output (MW)]) AS TotalOutput FROM IESO_Generators WHERE Fuel='NUCLEAR' GROUP BY DateTime ORDER BY DateTime DESC",
+    "SELECT TOP 100 DateTime, SUM([Output (MW)]) AS TotalOutput FROM IESO_Generators WHERE Fuel='SOLAR' GROUP BY DateTime ORDER BY DateTime DESC",
+    "SELECT TOP 100 DateTime, SUM([Output (MW)]) AS TotalOutput FROM IESO_Generators WHERE Fuel='WIND' GROUP BY DateTime ORDER BY DateTime DESC",
+  ],
+  'on-rt-interchange-actual': [
+    "SELECT TOP 30 DateTime, [Flow (MWh)] FROM IESO_ActualFlows WHERE Zone='MANITOBA' ORDER BY DateTime DESC",
+    "SELECT TOP 30 DateTime, [Flow (MWh)] FROM IESO_ActualFlows WHERE Zone='MANITOBA SK' ORDER BY DateTime DESC",
+    "SELECT TOP 30 DateTime, [Flow (MWh)] FROM IESO_ActualFlows WHERE Zone='MICHIGAN' ORDER BY DateTime DESC",
+    "SELECT TOP 30 DateTime, [Flow (MWh)] FROM IESO_ActualFlows WHERE Zone='MINNESOTA' ORDER BY DateTime DESC",
+    "SELECT TOP 30 DateTime, [Flow (MWh)] FROM IESO_ActualFlows WHERE Zone='NEW-YORK' ORDER BY DateTime DESC",
+    "SELECT TOP 30 DateTime, [Flow (MWh)] FROM IESO_ActualFlows WHERE Zone='Total' ORDER BY DateTime DESC",
+  ],
+  'on-rt-interchange-sched': [
+    "SELECT TOP 30 DateTime, [Exports (MWh)] FROM IESO_ScheduledFlows WHERE Zone='Total' ORDER BY DateTime DESC",
+    "SELECT TOP 30 DateTime, [Imports (MWh)] FROM IESO_ScheduledFlows WHERE Zone='Total' ORDER BY DateTime DESC",
+  ],
+  'on-rt-interchange-sched-v2': [
+    "SELECT TOP 30 DateTime, [Exports (MWh)] FROM IESO_ScheduledFlows WHERE Zone='MANITOBA' ORDER BY DateTime DESC",
+    "SELECT TOP 30 DateTime, [Exports (MWh)] FROM IESO_ScheduledFlows WHERE Zone='MANITOBA SK' ORDER BY DateTime DESC",
+    "SELECT TOP 30 DateTime, [Exports (MWh)] FROM IESO_ScheduledFlows WHERE Zone='MICHIGAN' ORDER BY DateTime DESC",
+    "SELECT TOP 30 DateTime, [Exports (MWh)] FROM IESO_ScheduledFlows WHERE Zone='MINNESOTA' ORDER BY DateTime DESC",
+    "SELECT TOP 30 DateTime, [Exports (MWh)] FROM IESO_ScheduledFlows WHERE Zone='NEW-YORK' ORDER BY DateTime DESC",
+    "SELECT TOP 30 DateTime, [Exports (MWh)] FROM IESO_ScheduledFlows WHERE Zone='Total' ORDER BY DateTime DESC",
+  ],
+  'on-rt-price': [
+    'SELECT TOP 30 DateTime, "HOEP ($/MWh)" FROM IESO_HOEP ORDER BY DateTime DESC;',
+  ],
+  'ns-rt-demand': [
+    'SELECT TOP 30 DateTime, [Net Load] FROM NSPower_SystemInformation ORDER BY DateTime DESC',
+    'SELECT TOP 30 DateTime,  [Wind Generation] FROM NSPower_SystemInformation ORDER BY DateTime DESC',
+  ],
+  'ns-rt-interchange': [`
+    SELECT TOP 30 DateTime, [Highlands Export], [East End Export (at Sydney)], [East End Export (at East Bay)],
+                  [Cape Breton Export], [Onslow Import], [NS Export], [Flow Into Metro], [Onslow South]
+                  [Western Import], [Valley Import], [Maritime Link Import]
+    FROM NSPower_SystemInformation ORDER BY DateTime DESC
+  `],
+  'nb-rt-demand': [
+    'SELECT TOP 30 DateTime, [NB Load] FROM NBPower_SystemInformation ORDER BY DateTime DESC',
+    'SELECT TOP 30 DateTime,  [NB Demand] FROM NBPower_SystemInformation ORDER BY DateTime DESC',
+  ],
+  'nb-rt-interchange': [`
+    SELECT TOP 30 DateTime, [East End Export (at Sydney)], [East End Export (at East Bay)],
+                  [Cape Breton Export], [Onslow Import], [NS Export], [Onslow South]
+    FROM NSPower_SystemInformation ORDER BY DateTime DESC;
+  `],
+  'nl-rt-supply': [
+    'SELECT TOP 30 DateTime, [Generation (MW)] FROM Nlhydro_SystemInformation ORDER BY DateTime DESC',
+  ],
+  'pei-rt-supply-demand': [`
+    SELECT TOP 30 DateTime, [Total Load (MW)], [Wind Power Used (MW)], [Total Wind Generation (MW)],
+    [Wind Power Exported (MW)], [Total Fossil Fuel Generation (MW)]
+    FROM PEI_SystemInformation ORDER BY DateTime DESC
+  `],
 };
 
 const dataStore = {};
