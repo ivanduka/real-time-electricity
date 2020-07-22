@@ -2,3 +2,6 @@
 node_modules
 _temp
 .env
+.external.env
+**/node_modules
+**/.env

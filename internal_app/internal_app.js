@@ -3,7 +3,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const sql = require('mssql/msnodesqlv8');
 require('dotenv').config();
-const rateLimit = require('express-rate-limit');
 
 const config = {
   database: process.env.DB_NAME,
@@ -12,11 +11,6 @@ const config = {
     trustedConnection: true,
   },
 };
-
-const apiLimiter = rateLimit({
-  windowMs: process.env.RATE_LIMITING_WINDOW_IN_SECONDS * 1000, // in milliseconds
-  max: process.env.RATE_LIMITING_LIMIT_PER_WINDOW, // requests per windowMs
-});
 
 const queries = {
   'ab-rt-fc-price': [`
@@ -267,10 +261,8 @@ const app = express();
 app.disable('etag');
 
 app.use(cors());
-app.get('/api/', (req, res, next) => apiLimiter(req, res, next));
-app.use('/', express.static('public'));
 app.use(bodyParser.json());
-app.get('/api/:type', (req, res, next) => apiController(req, res, next));
+app.post('/api/:type', (req, res, next) => apiController(req, res, next));
 app.use((err, req, res, next) => errorHandler(err, req, res, next));
 
 (async () => {
