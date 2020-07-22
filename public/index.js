@@ -125,7 +125,7 @@ const globalYAxisOptionsMW = {
   alternateGridColor: null,
 };
 
-function setGlobalChartTheme() {
+const setGlobalChartTheme = () => {
   Highcharts.theme = {
     chart: {
       backgroundColor: {
@@ -194,7 +194,7 @@ function setGlobalChartTheme() {
 
   // Apply the theme
   Highcharts.setOptions(Highcharts.theme);
-}
+};
 
 // Charts definitions
 
