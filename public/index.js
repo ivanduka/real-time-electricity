@@ -2,7 +2,7 @@
 
 // Styling
 
-const server = 'http://localhost:8899';
+const server = 'http://nebv-01Ivan:8899';
 
 const colors = {
   price: {
@@ -1302,7 +1302,7 @@ const charts = [
       navigation: {
       },
       time: {
-        timezone: 'America/Halifax',
+        timezone: 'America/Edmonton',
         useUTC: false,
       },
     },
@@ -1438,7 +1438,7 @@ const charts = [
       navigation: {
       },
       time: {
-        timezone: 'America/Halifax',
+        timezone: 'America/Edmonton',
         useUTC: false,
       },
     },
@@ -1494,7 +1494,7 @@ const charts = [
       navigation: {
       },
       time: {
-        timezone: 'America/Halifax',
+        timezone: 'America/Edmonton',
         useUTC: false,
       },
     },
@@ -1585,7 +1585,7 @@ const charts = [
       navigation: {
       },
       time: {
-        timezone: 'America/Halifax',
+        timezone: 'America/Edmonton',
         useUTC: false,
       },
     },
@@ -1631,7 +1631,7 @@ const charts = [
       navigation: {
       },
       time: {
-        timezone: 'America/St_Johns',
+        timezone: 'America/Edmonton',
         useUTC: false,
       },
     },
@@ -1713,7 +1713,7 @@ const charts = [
       navigation: {
       },
       time: {
-        timezone: 'America/St_Johns',
+        timezone: 'America/Edmonton',
         useUTC: false,
       },
     },
@@ -1755,10 +1755,7 @@ const getData = async (chartInfo, existingChart) => {
     const seriesData = rawData
       .map((row) => ({
         ...row,
-        DateTime: moment.tz(
-          row.DateTime.slice(0, row.DateTime.length - 1),
-          chartInfo.highchartsOptions.time.timezone,
-        )
+        DateTime: moment.tz(row.DateTime.slice(0, -1), chartInfo.highchartsOptions.time.timezone)
           .toDate()
           .getTime(),
       }))
