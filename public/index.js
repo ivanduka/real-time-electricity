@@ -1309,7 +1309,7 @@ const charts = [
   },
   { // NS: INTERCHANGE
     divId: 'ns-rt-interchange',
-    enabled: false,
+    enabled: true,
     realtimeInterval: 36000000, // every hour
     seriesInfo: [ // different table format here
       {
@@ -1501,7 +1501,7 @@ const charts = [
   },
   { // NB: INTERCHANGE
     divId: 'nb-rt-interchange',
-    enabled: false,
+    enabled: true,
     realtimeInterval: 36000000, // every hour
     seriesInfo: [ // different table format here
       {
@@ -1751,6 +1751,7 @@ const getData = async (chartInfo, existingChart) => {
     const rawData = dataArrays.length > 1 ? dataArrays[i] : dataArrays[0];
 
     // Parsing dates, sorting array by date, and creating 2d array for Highcharts
+    // Highcharts takes date in UNIX format (getTime method on Date object)
     const seriesData = rawData
       .map((row) => ({
         ...row,
@@ -1792,5 +1793,8 @@ window.createChartForDiv = async (node) => {
   const chart = charts.find((ch) => ch.divId === node.value && ch.enabled === true);
   if (chart) {
     await createChart(chart);
+  } else {
+    // eslint-disable-next-line no-console
+    console.log('This chart is not enabled');
   }
 };

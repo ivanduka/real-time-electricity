@@ -186,7 +186,7 @@ const queries = {
     SELECT TOP 30 DateTime, [Highlands Export], [East End Export (at Sydney)], [East End Export (at East Bay)],
                   [Cape Breton Export], [Onslow Import], [NS Export], [Flow Into Metro], [Onslow South]
                   [Western Import], [Valley Import], [Maritime Link Import]
-    FROM NSPower_SystemInformation ORDER BY DateTime DESC
+    FROM NSPower_SystemInformation ORDER BY DateTime DESC;
   `],
   'nb-rt-demand': [
     'SELECT TOP 30 DateTime, [NB Load] FROM NBPower_SystemInformation ORDER BY DateTime DESC',
