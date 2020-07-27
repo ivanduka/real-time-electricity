@@ -15,7 +15,7 @@ const apiController = async (req, res, next) => {
   try {
     const { type } = req.params;
     const result = await got.post(`${process.env.INTERNAL_SERVER_URL}/api/${type}`,
-      { responseType: 'json' });
+      { responseType: String('json'), timeout: Number(process.env.REQUEST_TIMEOUT) });
     res.json(result.body);
   } catch (error) {
     next(error);
