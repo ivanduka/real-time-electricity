@@ -2,7 +2,7 @@
 
 // Styling
 
-const server = 'http://nebv-01Ivan:8899';
+const server = 'http://nebv-01Ivan:8898';
 
 const colors = {
   price: {
