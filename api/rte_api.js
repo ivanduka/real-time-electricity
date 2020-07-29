@@ -217,16 +217,21 @@ const fetchData = async (type) => {
 };
 
 const populateDataStore = async () => {
-  const promises = {};
-  // eslint-disable-next-line no-restricted-syntax, guard-for-in
-  for (const type in queries) {
-    promises[type] = fetchData(type);
-  }
+  try {
+    const promises = {};
+    // eslint-disable-next-line no-restricted-syntax, guard-for-in
+    for (const type in queries) {
+      promises[type] = fetchData(type);
+    }
 
-  // eslint-disable-next-line no-restricted-syntax, guard-for-in
-  for (const type in promises) {
+    // eslint-disable-next-line no-restricted-syntax, guard-for-in
+    for (const type in promises) {
     // eslint-disable-next-line no-await-in-loop
-    dataStore[type] = await promises[type]; // waiting for promises, so it's OK to await here
+      dataStore[type] = await promises[type]; // waiting for promises, so it's OK to await here
+    }
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log(err);
   }
 };
 
