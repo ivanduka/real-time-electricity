@@ -4,4 +4,4 @@ _temp
 .env
 .external.env
 **/node_modules
-**/.env
+api/.env-no-secrets-here
