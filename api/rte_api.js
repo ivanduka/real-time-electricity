@@ -10,8 +10,6 @@ const apiLimiter = rateLimit({
   max: process.env.RATE_LIMITING_LIMIT_PER_WINDOW, // requests per windowMs
 });
 
-const connectionString = `DSN=${process.env.ODBC_NAME}`;
-
 const queries = {
   'ab-rt-fc-price': [`
     SELECT TOP 30 "DateTime", "Forecast Pool Price", "Actual Posted Pool Price"
@@ -210,7 +208,7 @@ const queries = {
 const dataStore = {};
 
 const fetchData = async (type) => {
-  await sql.connect(connectionString);
+  await sql.connect(process.env.ODBC_CONNECTION_STRING);
   const promises = queries[type].map((q) => sql.query(q));
   const results = await Promise.all(promises);
   return results.map((result) => result.recordset);
@@ -274,5 +272,5 @@ app.use((err, req, res, next) => errorHandler(err, req, res, next));
 (async () => {
   await populateDataStore();
   // eslint-disable-next-line no-console
-  app.listen(process.env.PORT, () => console.log(`Using '${connectionString}' as the connection string. Listening on port ${process.env.PORT}...`));
+  app.listen(process.env.PORT, () => console.log(`Using '${process.env.ODBC_CONNECTION_STRING}' as the connection string. Listening on port ${process.env.PORT}...`));
 })();
