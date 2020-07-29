@@ -272,5 +272,5 @@ app.use((err, req, res, next) => errorHandler(err, req, res, next));
 (async () => {
   await populateDataStore();
   // eslint-disable-next-line no-console
-  app.listen(process.env.PORT, () => console.log(`Using '${process.env.ODBC_CONNECTION_STRING}' as the connection string. Listening on port ${process.env.PORT}...`));
+  app.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}...`));
 })();
