@@ -2,8 +2,6 @@
 
 // Styling
 
-const server = 'http://nebv-01Ivan:8898';
-
 const colors = {
   price: {
     dark: '#2e684c',
@@ -761,11 +759,11 @@ const charts = [
         text: 'Electricity demand',
       },
       subtitle: {
-        text: "Source: <a href='http://reports.ieso.ca/public/RealtimeConstTotals/PUB_RealtimeConstTotals.xml'>IESO</a>",
+        text: 'Source: <a href=\'http://reports.ieso.ca/public/RealtimeConstTotals/PUB_RealtimeConstTotals.xml\'>IESO</a>',
         useHTML: true,
       },
       caption: {
-        text: "Description:This graphs contains real time data on Ontario's electricity demand and supply. Total energy is equal to the sum of total loss and total load. Ontario demand is equal to total load minus trade.",
+        text: 'Description:This graphs contains real time data on Ontario\'s electricity demand and supply. Total energy is equal to the sum of total loss and total load. Ontario demand is equal to total load minus trade.',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: {
@@ -777,8 +775,7 @@ const charts = [
       plotOptions: {
         areaspline: globalAreaSplineOptions,
       },
-      navigation: {
-      },
+      navigation: {},
       time: {
         timezone: 'America/Toronto',
         useUTC: false,
@@ -855,7 +852,7 @@ const charts = [
         text: 'Electricity generation capacity by fuel type',
       },
       subtitle: {
-        text: "Source: <a href='http://reports.ieso.ca/public/GenOutputCapability/PUB_GenOutputCapability.xml'>IESO</a>",
+        text: 'Source: <a href=\'http://reports.ieso.ca/public/GenOutputCapability/PUB_GenOutputCapability.xml\'>IESO</a>',
         useHTML: true,
       },
       caption: {
@@ -868,8 +865,7 @@ const charts = [
       plotOptions: {
         spline: globalSplineOptions,
       },
-      navigation: {
-      },
+      navigation: {},
       time: {
         timezone: 'America/Toronto',
         useUTC: false,
@@ -946,7 +942,7 @@ const charts = [
         text: 'Electricity generation (output) by fuel type',
       },
       subtitle: {
-        text: "Source: <a href='http://reports.ieso.ca/public/GenOutputCapability/PUB_GenOutputCapability.xml'>IESO</a>",
+        text: 'Source: <a href=\'http://reports.ieso.ca/public/GenOutputCapability/PUB_GenOutputCapability.xml\'>IESO</a>',
         useHTML: true,
       },
       caption: {
@@ -959,8 +955,7 @@ const charts = [
       plotOptions: {
         spline: globalSplineOptions,
       },
-      navigation: {
-      },
+      navigation: {},
       time: {
         timezone: 'America/Toronto',
         useUTC: false,
@@ -1037,7 +1032,7 @@ const charts = [
         text: 'Actual electricity trade flows',
       },
       subtitle: {
-        text: "Source: <a href='http://www.ieso.ca/en/Power-Data/This-Hours-Data'>IESO</a>",
+        text: 'Source: <a href=\'http://www.ieso.ca/en/Power-Data/This-Hours-Data\'>IESO</a>',
         useHTML: true,
       },
       caption: {
@@ -1050,8 +1045,7 @@ const charts = [
       plotOptions: {
         spline: globalSplineOptions,
       },
-      navigation: {
-      },
+      navigation: {},
       time: {
         timezone: 'America/Toronto',
         useUTC: false,
@@ -1092,7 +1086,7 @@ const charts = [
         text: 'Actual electricity trade flows',
       },
       subtitle: {
-        text: "Source: <a href='http://www.ieso.ca/en/Power-Data/This-Hours-Data'>IESO</a>",
+        text: 'Source: <a href=\'http://www.ieso.ca/en/Power-Data/This-Hours-Data\'>IESO</a>',
         useHTML: true,
       },
       caption: {
@@ -1105,8 +1099,7 @@ const charts = [
       plotOptions: {
         spline: globalSplineOptions,
       },
-      navigation: {
-      },
+      navigation: {},
       time: {
         timezone: 'America/Toronto',
         useUTC: false,
@@ -1183,7 +1176,7 @@ const charts = [
         text: 'Actual electricity trade flows',
       },
       subtitle: {
-        text: "Source: <a href='http://www.ieso.ca/en/Power-Data/This-Hours-Data'>IESO</a>",
+        text: 'Source: <a href=\'http://www.ieso.ca/en/Power-Data/This-Hours-Data\'>IESO</a>',
         useHTML: true,
       },
       caption: {
@@ -1196,8 +1189,7 @@ const charts = [
       plotOptions: {
         spline: globalSplineOptions,
       },
-      navigation: {
-      },
+      navigation: {},
       time: {
         timezone: 'America/Toronto',
         useUTC: false,
@@ -1229,11 +1221,11 @@ const charts = [
         text: 'Electricity Price',
       },
       subtitle: {
-        text: "Source: <a href='http://reports.ieso.ca/public/DispUnconsHOEP/>IESO</a>",
+        text: 'Source: <a href=\'http://reports.ieso.ca/public/DispUnconsHOEP/>IESO</a>',
         useHTML: true,
       },
       caption: {
-        text: "Description: This graph contains real time data on Ontario's hourly electricity price (HOEP).",
+        text: 'Description: This graph contains real time data on Ontario\'s hourly electricity price (HOEP).',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: globalYAxisOptionsPrice,
@@ -1243,8 +1235,7 @@ const charts = [
       plotOptions: {
         spline: globalSplineOptions,
       },
-      navigation: {
-      },
+      navigation: {},
       time: {
         timezone: 'America/Toronto',
         useUTC: false,
@@ -1286,11 +1277,11 @@ const charts = [
         text: 'Net load and wind generation',
       },
       subtitle: {
-        text: "Source: <a href='https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml'>NSPower</a>",
+        text: 'Source: <a href=\'https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml\'>NSPower</a>',
         useHTML: true,
       },
       caption: {
-        text: "Description: This graph contains real time data on Nova Scotia's net electricity load and wind generation.",
+        text: 'Description: This graph contains real time data on Nova Scotia\'s net electricity load and wind generation.',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: globalYAxisOptionsMW,
@@ -1299,8 +1290,7 @@ const charts = [
       plotOptions: {
         spline: globalSplineOptions,
       },
-      navigation: {
-      },
+      navigation: {},
       time: {
         timezone: 'America/Edmonton',
         useUTC: false,
@@ -1422,11 +1412,11 @@ const charts = [
         text: 'Trade flows',
       },
       subtitle: {
-        text: "Source: <a href='https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml'>NSPower</a>",
+        text: 'Source: <a href=\'https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml\'>NSPower</a>',
         useHTML: true,
       },
       caption: {
-        text: "Description: This graph contains real time data on Nova Scotia's electricity trade flows",
+        text: 'Description: This graph contains real time data on Nova Scotia\'s electricity trade flows',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: globalYAxisOptionsMW,
@@ -1435,8 +1425,7 @@ const charts = [
       plotOptions: {
         spline: globalSplineOptions,
       },
-      navigation: {
-      },
+      navigation: {},
       time: {
         timezone: 'America/Edmonton',
         useUTC: false,
@@ -1478,11 +1467,11 @@ const charts = [
         text: 'Provincial electricity load and demand',
       },
       subtitle: {
-        text: "Source: <a href='https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml'>NSPower</a>",
+        text: 'Source: <a href=\'https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml\'>NSPower</a>',
         useHTML: true,
       },
       caption: {
-        text: "Description: This graphs contains real time data on New Brunswick's electricity load and demand.",
+        text: 'Description: This graphs contains real time data on New Brunswick\'s electricity load and demand.',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: globalYAxisOptionsMW,
@@ -1491,8 +1480,7 @@ const charts = [
       plotOptions: {
         spline: globalSplineOptions,
       },
-      navigation: {
-      },
+      navigation: {},
       time: {
         timezone: 'America/Edmonton',
         useUTC: false,
@@ -1569,11 +1557,11 @@ const charts = [
         text: 'Trade flows',
       },
       subtitle: {
-        text: "Source: <a href='https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml'>NSPower</a>",
+        text: 'Source: <a href=\'https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml\'>NSPower</a>',
         useHTML: true,
       },
       caption: {
-        text: "Description: This graph contains real time data on Nova Scotia's electricity trade flows",
+        text: 'Description: This graph contains real time data on Nova Scotia\'s electricity trade flows',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: globalYAxisOptionsMW,
@@ -1582,8 +1570,7 @@ const charts = [
       plotOptions: {
         spline: globalSplineOptions,
       },
-      navigation: {
-      },
+      navigation: {},
       time: {
         timezone: 'America/Edmonton',
         useUTC: false,
@@ -1615,11 +1602,11 @@ const charts = [
         text: 'Electricity generation',
       },
       subtitle: {
-        text: "Source: <a href='https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml'>NSPower</a>",
+        text: 'Source: <a href=\'https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml\'>NSPower</a>',
         useHTML: true,
       },
       caption: {
-        text: "Description: This graphs contains real time data on New Brunswick's electricity load and demand.",
+        text: 'Description: This graphs contains real time data on New Brunswick\'s electricity load and demand.',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: globalYAxisOptionsMW,
@@ -1628,8 +1615,7 @@ const charts = [
       plotOptions: {
         spline: globalSplineOptions,
       },
-      navigation: {
-      },
+      navigation: {},
       time: {
         timezone: 'America/Edmonton',
         useUTC: false,
@@ -1697,11 +1683,11 @@ const charts = [
         text: 'PEI Load, generation and trade',
       },
       subtitle: {
-        text: "Source: <a href='https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml'>NSPower</a>",
+        text: 'Source: <a href=\'https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml\'>NSPower</a>',
         useHTML: true,
       },
       caption: {
-        text: "Description: This graphs contains real time data on New Brunswick's electricity load and demand.",
+        text: 'Description: This graphs contains real time data on New Brunswick\'s electricity load and demand.',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: globalYAxisOptionsMW,
@@ -1710,8 +1696,7 @@ const charts = [
       plotOptions: {
         spline: globalSplineOptions,
       },
-      navigation: {
-      },
+      navigation: {},
       time: {
         timezone: 'America/Edmonton',
         useUTC: false,
@@ -1726,7 +1711,7 @@ const charts = [
 
 // request data from API endpoint
 const fetchDataFromDB = async (type) => {
-  const result = await fetch(`${server}/api/${type}`);
+  const result = await fetch(`/api/${type}`);
   if (!result.ok) {
     // eslint-disable-next-line no-console
     console.error(`Couldn't fetch ${type}: ${result}`);
