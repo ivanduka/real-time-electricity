@@ -1713,14 +1713,12 @@ const charts = [
 const fetchDataFromDB = async (type) => {
   const result = await fetch(`/rte/api/${type}`);
   if (!result.ok) {
-    // eslint-disable-next-line no-console
-    console.error(`Couldn't fetch ${type}: ${result}`);
     return [];
   }
   const data = await result.json();
   if (data.length === 0) {
     // eslint-disable-next-line no-console
-    return console.log(`Error getting ${type}`);
+    return console.log(`Error getting ${type}: empty result returned`);
   }
   return data;
 };
@@ -1728,6 +1726,9 @@ const fetchDataFromDB = async (type) => {
 const getData = async (chartInfo, existingChart) => {
   // Getting data from the DB
   const dataArrays = await fetchDataFromDB(chartInfo.divId);
+  if (dataArrays.length === 0) {
+    return;
+  }
 
   // Processing data
   for (let i = 0; i < chartInfo.seriesInfo.length; i += 1) {
@@ -1757,13 +1758,15 @@ const getData = async (chartInfo, existingChart) => {
 };
 
 const createChart = async (chartInfo) => {
-  await getData(chartInfo, null);
-  const chart = Highcharts.chart(chartInfo.divId, chartInfo.highchartsOptions);
+  const result = await getData(chartInfo, null);
+  if (result === true) {
+    const chart = Highcharts.chart(chartInfo.divId, chartInfo.highchartsOptions);
 
-  if (chartInfo.realtimeInterval > 0) {
-    setInterval(async () => {
-      await getData(chartInfo, chart);
-    }, chartInfo.realtimeInterval);
+    if (chartInfo.realtimeInterval > 0) {
+      setInterval(async () => {
+        await getData(chartInfo, chart);
+      }, chartInfo.realtimeInterval);
+    }
   }
 };
 
