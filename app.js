@@ -262,12 +262,12 @@ function errorHandler(err, req, res, next) {
 
 const app = express();
 app.set('trust proxy', 1);
-app.get('/api/', (req, res, next) => apiLimiter(req, res, next));
-app.use('/', express.static('public'));
+app.get('/rte/api/', (req, res, next) => apiLimiter(req, res, next));
+app.use('/rte/', express.static('public'));
 app.disable('etag');
 app.use(cors());
 app.use(bodyParser.json());
-app.get('/api/:type', (req, res, next) => apiController(req, res, next));
+app.get('/rte/api/:type', (req, res, next) => apiController(req, res, next));
 app.use((err, req, res, next) => errorHandler(err, req, res, next));
 
 (async () => {

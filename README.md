@@ -7,4 +7,4 @@ To set up the app:
 - Copy api/.env.example to .env in the same folder and adjust it, if needed
 - Open the app folder in a terminal and run `npm install` to install the dependencies
 - Run `npm start` in the terminal to start the app
-- Open http://localhost:8898 to test the app
+- Open http://localhost:8898/rte to test the app

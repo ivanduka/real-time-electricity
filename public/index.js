@@ -1711,7 +1711,7 @@ const charts = [
 
 // request data from API endpoint
 const fetchDataFromDB = async (type) => {
-  const result = await fetch(`/api/${type}`);
+  const result = await fetch(`/rte/api/${type}`);
   if (!result.ok) {
     // eslint-disable-next-line no-console
     console.error(`Couldn't fetch ${type}: ${result}`);
