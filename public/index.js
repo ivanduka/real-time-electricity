@@ -1727,7 +1727,7 @@ const getData = async (chartInfo, existingChart) => {
   // Getting data from the DB
   const dataArrays = await fetchDataFromDB(chartInfo.divId);
   if (dataArrays.length === 0) {
-    return;
+    return false;
   }
 
   // Processing data
@@ -1755,6 +1755,8 @@ const getData = async (chartInfo, existingChart) => {
       chartInfo.highchartsOptions.series[i].data = seriesData;
     }
   }
+
+  return true;
 };
 
 const createChart = async (chartInfo) => {
