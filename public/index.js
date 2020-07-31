@@ -1198,7 +1198,7 @@ const charts = [
   },
   { // ON: PRICE
     divId: 'on-rt-price',
-    enabled: false,
+    enabled: true,
     realtimeInterval: 3600000, // every hour
     seriesInfo: [
       {
