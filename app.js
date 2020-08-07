@@ -4,6 +4,13 @@ const bodyParser = require('body-parser');
 const sql = require('mssql/msnodesqlv8');
 require('dotenv').config();
 const rateLimit = require('express-rate-limit');
+const slowDown = require('express-slow-down');
+
+const speedLimiter = slowDown({
+  windowMs: process.env.SPEED_LIMITING_WINDOW_IN_SECONDS * 1000, // in milliseconds
+  delayAfter: process.env.SPEED_LIMITING_LIMIT_PER_WINDOW, // requests per windowMs
+  delayMs: process.env.SPEED_LIMITING_DELAY_IN_MS, // begin adding X ms of delay after limit
+});
 
 const apiLimiter = rateLimit({
   windowMs: process.env.RATE_LIMITING_WINDOW_IN_SECONDS * 1000, // in milliseconds
@@ -262,7 +269,8 @@ function errorHandler(err, req, res, next) {
 
 const app = express();
 app.set('trust proxy', 1);
-app.get('/rte/api/', (req, res, next) => apiLimiter(req, res, next));
+app.use(apiLimiter);
+app.use(speedLimiter);
 app.use('/rte/', express.static('public'));
 app.disable('etag');
 app.use(cors());
