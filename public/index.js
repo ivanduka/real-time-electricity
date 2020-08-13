@@ -4,22 +4,27 @@
 
 const colors = {
   price: {
-    dark: '#2e684c',
-    main: '#66a182',
-    light: '#a8e5c4',
+    light: "#48e6a0", //"#04fba4",
+    main: "#00bb83"
   },
   supply: {
-    dark: 'rgb(35, 90, 103)',
-    main: 'rgb(59,167, 191)',
-    light: 'rgb(147, 215, 230)',
+    dark: '#0000ff',
+    main: '#9d02d7',
+    light: '#cd34b5',
     series: ['#ffd700', '#ffb14e', '#fa8775', '#ea5f94', '#cd34b5', '#9d02d7', '#0000ff'],
   },
-  demand: {
+  demand2: {
     main: 'rgba(239, 107, 0, 1)', // ef6b00
     light: 'rgba(239, 151, 0, 1)',
     dark: 'rgb(50, 23, 1)',
     ultralight: '#ffc163',
     set: ['#620000', '#911700', '#b93e00', '#e16000', '#fc8c2c', '#ffc163'],
+  },
+  demand: {
+    ultralight: "#ffd700",
+    light: "#ffb14e",
+    main: "#fa8775",
+    dark: "#ef5909",
   },
   text: {
     main: 'rgba(50, 59, 61, 1)',
@@ -288,17 +293,19 @@ const charts = [
     ],
     highchartsOptions: {
       chart: {
-        type: 'areaspline',
+       type: 'areaspline',
       },
       series: [
         {
+          type: 'spline',
           name: 'Day-Ahead Forecasted AIL',
-          color: colors.demand.ultralight,
+          color: colors.demand.dark,
+          dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Actual AIL',
-          color: colors.demand.main,
+          color: colors.demand.ultralight,
           data: [],
         },
       ],
@@ -357,7 +364,7 @@ const charts = [
         },
         {
           name: '30-Day Rolling Average Pool Price ($/MWh)',
-          color: colors.price.dark,
+          color: colors.price.main,
           dashStyle: 'shortdash',
         },
       ],
@@ -404,18 +411,18 @@ const charts = [
     ],
     highchartsOptions: {
       chart: {
-        type: 'area',
+        type: 'spline',
       },
       series: [
         {
+          type: 'areaspline',
           name: 'Alberta Internal Load (AIL)',
-          color: colors.demand.main,
+          color: colors.demand.ultralight,
           data: [],
         },
         {
           name: 'Total net generation',
-          color: colors.supply.light,
-          dashStyle: 'shortdash',
+          color: colors.supply.dark,
           data: [],
         },
       ],
@@ -732,7 +739,7 @@ const charts = [
     ],
     highchartsOptions: {
       chart: {
-        type: 'areaspline',
+        type: 'spline',
       },
       series: [
         {
@@ -776,6 +783,7 @@ const charts = [
       tooltip: mwTooltipOptions,
       plotOptions: {
         areaspline: globalAreaSplineOptions,
+        spline: globalSplineOptions,
       },
       navigation: {},
       time: {
@@ -1214,8 +1222,7 @@ const charts = [
       },
       series: [{
         name: 'Electricity Price',
-        color: colors.price.light,
-        dashStyle: 'shortdot',
+        color: colors.price.main,
         data: [],
       }],
 
@@ -1265,10 +1272,11 @@ const charts = [
       series: [
         {
           name: 'Net Load',
-          color: colors.demand.main,
+          color: colors.demand.ultralight,
           data: [],
         },
         {
+          type: 'spline',
           name: 'Wind Generation',
           color: colors.supply.light,
           dashStyle: 'shortdash',
@@ -1392,21 +1400,25 @@ const charts = [
         {
           name: 'Flow Into Metro',
           color: colors.supply.series[0],
+          dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Western Import',
           color: colors.supply.series[1],
+          dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Valley Import',
           color: colors.supply.series[2],
+          dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Maritime Link Import',
           color: colors.supply.series[3],
+          dashStyle: 'shortdot',
           data: [],
         },
       ],
@@ -1656,13 +1668,13 @@ const charts = [
       },
       series: [
         {
-          name: 'Generation',
-          color: colors.supply.main,
+          name: 'Total On-Island Load',
+          color: colors.demand.main,
           data: [],
         },
         {
           name: 'Wind Power Used',
-          color: colors.supply.main,
+          color: colors.demand.dark,
           data: [],
         },
         {
@@ -1672,12 +1684,12 @@ const charts = [
         },
         {
           name: 'Wind Power Exported',
-          color: colors.supply.main,
+          color: colors.supply.series[3],
           data: [],
         },
         {
           name: 'Total Fossil Fuel Generation',
-          color: colors.supply.main,
+          color: colors.supply.dark,
           data: [],
         },
       ],
