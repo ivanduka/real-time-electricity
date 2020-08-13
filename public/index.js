@@ -297,14 +297,15 @@ const charts = [
       },
       series: [
         {
+          type: 'spline',
           name: 'Day-Ahead Forecasted AIL',
-          color: colors.demand.light,
+          color: colors.demand.dark,
           dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Actual AIL',
-          color: colors.demand.main,
+          color: colors.demand.ultralight,
           data: [],
         },
       ],
@@ -410,18 +411,18 @@ const charts = [
     ],
     highchartsOptions: {
       chart: {
-        type: 'area',
+        type: 'spline',
       },
       series: [
         {
+          type: 'areaspline',
           name: 'Alberta Internal Load (AIL)',
-          color: colors.demand.main,
+          color: colors.demand.ultralight,
           data: [],
         },
         {
           name: 'Total net generation',
-          color: colors.supply.light,
-          dashStyle: 'shortdash',
+          color: colors.supply.dark,
           data: [],
         },
       ],
@@ -742,6 +743,7 @@ const charts = [
       },
       series: [
         {
+          type: 'areaspline',
           name: 'Total Energy',
           color: colors.demand.ultralight,
           data: [],
