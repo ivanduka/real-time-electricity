@@ -8,9 +8,9 @@ const colors = {
     main: "#00bb83"
   },
   supply: {
-    dark: 'rgb(35, 90, 103)',
-    main: 'rgb(59,167, 191)',
-    light: 'rgb(147, 215, 230)',
+    dark: '#0000ff',
+    main: '#9d02d7',
+    light: '#cd34b5',
     series: ['#ffd700', '#ffb14e', '#fa8775', '#ea5f94', '#cd34b5', '#9d02d7', '#0000ff'],
   },
   demand2: {
@@ -1667,12 +1667,12 @@ const charts = [
       series: [
         {
           name: 'Total On-Island Load',
-          color: colors.supply.main,
+          color: colors.demand.main,
           data: [],
         },
         {
           name: 'Wind Power Used',
-          color: colors.supply.main,
+          color: colors.demand.dark,
           data: [],
         },
         {
@@ -1682,12 +1682,12 @@ const charts = [
         },
         {
           name: 'Wind Power Exported',
-          color: colors.supply.main,
+          color: colors.supply.series[3],
           data: [],
         },
         {
           name: 'Total Fossil Fuel Generation',
-          color: colors.supply.main,
+          color: colors.supply.dark,
           data: [],
         },
       ],
