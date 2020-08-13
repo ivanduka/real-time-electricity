@@ -1272,10 +1272,11 @@ const charts = [
       series: [
         {
           name: 'Net Load',
-          color: colors.demand.main,
+          color: colors.demand.ultralight,
           data: [],
         },
         {
+          type: 'spline',
           name: 'Wind Generation',
           color: colors.supply.light,
           dashStyle: 'shortdash',
