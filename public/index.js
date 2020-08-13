@@ -4,9 +4,8 @@
 
 const colors = {
   price: {
-    dark: '#2e684c',
-    main: '#66a182',
-    light: '#a8e5c4',
+    light: "#48e6a0", //"#04fba4",
+    main: "#00bb83"
   },
   supply: {
     dark: 'rgb(35, 90, 103)',
@@ -14,12 +13,18 @@ const colors = {
     light: 'rgb(147, 215, 230)',
     series: ['#ffd700', '#ffb14e', '#fa8775', '#ea5f94', '#cd34b5', '#9d02d7', '#0000ff'],
   },
-  demand: {
+  demand2: {
     main: 'rgba(239, 107, 0, 1)', // ef6b00
     light: 'rgba(239, 151, 0, 1)',
     dark: 'rgb(50, 23, 1)',
     ultralight: '#ffc163',
     set: ['#620000', '#911700', '#b93e00', '#e16000', '#fc8c2c', '#ffc163'],
+  },
+  demand: {
+    ultralight: "#ffd700",
+    light: "#ffb14e",
+    main: "#fa8775",
+    dark: "#ef5909",
   },
   text: {
     main: 'rgba(50, 59, 61, 1)',
@@ -288,12 +293,13 @@ const charts = [
     ],
     highchartsOptions: {
       chart: {
-        type: 'areaspline',
+       type: 'areaspline',
       },
       series: [
         {
           name: 'Day-Ahead Forecasted AIL',
-          color: colors.demand.ultralight,
+          color: colors.demand.light,
+          dashStyle: 'shortdot',
           data: [],
         },
         {
@@ -357,7 +363,7 @@ const charts = [
         },
         {
           name: '30-Day Rolling Average Pool Price ($/MWh)',
-          color: colors.price.dark,
+          color: colors.price.main,
           dashStyle: 'shortdash',
         },
       ],
@@ -1215,8 +1221,7 @@ const charts = [
       },
       series: [{
         name: 'Electricity Price',
-        color: colors.price.light,
-        dashStyle: 'shortdot',
+        color: colors.price.main,
         data: [],
       }],
 
