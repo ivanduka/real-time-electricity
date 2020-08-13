@@ -1,25 +1,30 @@
 /* global Highcharts, moment */
 
-// Styling
+//#region Styling
 
 const colors = {
   price: {
-    dark: '#2e684c',
-    main: '#66a182',
-    light: '#a8e5c4',
+    light: "#48e6a0", //"#04fba4",
+    main: "#00bb83"
   },
   supply: {
-    dark: 'rgb(35, 90, 103)',
-    main: 'rgb(59,167, 191)',
-    light: 'rgb(147, 215, 230)',
+    dark: '#0000ff',
+    main: '#9d02d7',
+    light: '#cd34b5',
     series: ['#ffd700', '#ffb14e', '#fa8775', '#ea5f94', '#cd34b5', '#9d02d7', '#0000ff'],
   },
-  demand: {
+  demand2: {
     main: 'rgba(239, 107, 0, 1)', // ef6b00
     light: 'rgba(239, 151, 0, 1)',
     dark: 'rgb(50, 23, 1)',
     ultralight: '#ffc163',
     set: ['#620000', '#911700', '#b93e00', '#e16000', '#fc8c2c', '#ffc163'],
+  },
+  demand: {
+    ultralight: "#ffd700",
+    light: "#ffb14e",
+    main: "#fa8775",
+    dark: "#ef5909",
   },
   text: {
     main: 'rgba(50, 59, 61, 1)',
@@ -209,6 +214,8 @@ const setGlobalChartTheme = () => {
   Highcharts.setOptions(Highcharts.theme);
 };
 
+//#endregion
+
 // Charts definitions
 
 const charts = [
@@ -244,7 +251,7 @@ const charts = [
         },
       ],
       title: {
-        text: 'Realtime and forecasted electricity pool price (Alberta)',
+        text: 'Alberta: Realtime and forecasted electricity pool price',
       },
       subtitle: {
         text:
@@ -286,22 +293,24 @@ const charts = [
     ],
     highchartsOptions: {
       chart: {
-        type: 'areaspline',
+       type: 'areaspline',
       },
       series: [
         {
+          type: 'spline',
           name: 'Day-Ahead Forecasted AIL',
-          color: colors.demand.ultralight,
+          color: colors.demand.dark,
+          dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Actual AIL',
-          color: colors.demand.main,
+          color: colors.demand.ultralight,
           data: [],
         },
       ],
       title: {
-        text: 'Day-Ahead Forecasted and Actual Internal Load (Alberta)',
+        text: 'Alberta: Day-Ahead Forecasted and Actual Internal Load',
       },
       subtitle: {
         text:
@@ -310,7 +319,7 @@ const charts = [
       },
       caption: {
         text:
-          'Description: This graph provides real time, hourly information on the Forecasted and Actual internal load two hours ahead of the current hour.',
+          'Description: This graph provides real time, hourly information on the actual Alberta internal load (AIL) and the forecasted internal load two hours ahead of the current hour.',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: {
@@ -355,12 +364,12 @@ const charts = [
         },
         {
           name: '30-Day Rolling Average Pool Price ($/MWh)',
-          color: colors.price.dark,
+          color: colors.price.main,
           dashStyle: 'shortdash',
         },
       ],
       title: {
-        text: 'Historical actual and average electricity pool prices (Alberta)',
+        text: 'Alberta: Historical actual and average electricity pool prices',
       },
       subtitle: {
         text:
@@ -402,23 +411,23 @@ const charts = [
     ],
     highchartsOptions: {
       chart: {
-        type: 'area',
+        type: 'spline',
       },
       series: [
         {
+          type: 'areaspline',
           name: 'Alberta Internal Load (AIL)',
-          color: colors.demand.main,
+          color: colors.demand.ultralight,
           data: [],
         },
         {
           name: 'Total net generation',
-          color: colors.supply.light,
-          dashStyle: 'shortdash',
+          color: colors.supply.dark,
           data: [],
         },
       ],
       title: {
-        text: 'Alberta Internal Load (AIL) and Total Net Generation',
+        text: 'Alberta: Internal Load (AIL) and Total Net Generation',
       },
       subtitle: {
         text:
@@ -493,16 +502,16 @@ const charts = [
         },
       ],
       title: {
-        text: 'Alberta Realtime Electricity Trade',
+        text: 'Alberta: Realtime Electricity Trade',
       },
       subtitle: {
         text:
-          'Source: <a href=\'http://ets.aeso.ca/ets_web/ip/Market/Reports/ActualForecastWMRQHReportServlet\'>AESO</a>',
+          'Source: <a href=\'http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet\'>AESO</a>',
         useHTML: true,
       },
       caption: {
         text:
-          'Description: This graph contains real time data on Alberta\'s electricity trade, or net actual interchange, with surrounding jurisdictions.',
+          'Description: This graph contains real time data on Alberta\'s electricity trade, or net actual interchange, with surrounding jurisdictions. Negative values represent imports and positive values represent exports from Alberta.',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: globalYAxisOptionsMW,
@@ -586,11 +595,11 @@ const charts = [
         },
       ],
       title: {
-        text: 'Alberta Maximum generation capability by energy group',
+        text: 'Alberta: Generation capability by fuel type',
       },
       subtitle: {
         text:
-          'Source: <a href=\'http://ets.aeso.ca/ets_web/ip/Market/Reports/ActualForecastWMRQHReportServlet\'>AESO</a>',
+          'Source: <a href=\'http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet\'>AESO</a>',
         useHTML: true,
       },
       caption: {
@@ -681,11 +690,11 @@ const charts = [
         },
       ],
       title: {
-        text: 'Alberta Total net generation by energy group',
+        text: 'Alberta: Total net generation by fuel type',
       },
       subtitle: {
         text:
-          'Source: <a href=\'http://ets.aeso.ca/ets_web/ip/Market/Reports/ActualForecastWMRQHReportServlet\'>AESO</a>',
+          'Source: <a href=\'http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet\'>AESO</a>',
         useHTML: true,
       },
       caption: {
@@ -730,7 +739,7 @@ const charts = [
     ],
     highchartsOptions: {
       chart: {
-        type: 'areaspline',
+        type: 'spline',
       },
       series: [
         {
@@ -756,14 +765,14 @@ const charts = [
 
       ],
       title: {
-        text: 'Electricity demand',
+        text: 'Ontario: Electricity demand',
       },
       subtitle: {
         text: 'Source: <a href=\'http://reports.ieso.ca/public/RealtimeConstTotals/PUB_RealtimeConstTotals.xml\'>IESO</a>',
         useHTML: true,
       },
       caption: {
-        text: 'Description:This graphs contains real time data on Ontario\'s electricity demand and supply. Total energy is equal to the sum of total loss and total load. Ontario demand is equal to total load minus trade.',
+        text: 'Description: This graph contains real time data on Ontario\'s electricity demand and supply. Total energy is equal to the sum of total loss and total load. Ontario demand is equal to total load minus trade.',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: {
@@ -774,6 +783,7 @@ const charts = [
       tooltip: mwTooltipOptions,
       plotOptions: {
         areaspline: globalAreaSplineOptions,
+        spline: globalSplineOptions,
       },
       navigation: {},
       time: {
@@ -849,14 +859,14 @@ const charts = [
         },
       ],
       title: {
-        text: 'Electricity generation capacity by fuel type',
+        text: 'Ontario: Electricity generation capacity by fuel type',
       },
       subtitle: {
         text: 'Source: <a href=\'http://reports.ieso.ca/public/GenOutputCapability/PUB_GenOutputCapability.xml\'>IESO</a>',
         useHTML: true,
       },
       caption: {
-        text: 'Description: This graph contains real time data on electricity generation capacity, by fuel type',
+        text: 'Description: This graph contains real time data on electricity generation capacity, by fuel type.',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: globalYAxisOptionsMW,
@@ -939,7 +949,7 @@ const charts = [
         },
       ],
       title: {
-        text: 'Electricity generation (output) by fuel type',
+        text: 'Ontario: Electricity generation (output) by fuel type',
       },
       subtitle: {
         text: 'Source: <a href=\'http://reports.ieso.ca/public/GenOutputCapability/PUB_GenOutputCapability.xml\'>IESO</a>',
@@ -987,10 +997,10 @@ const charts = [
         name: 'New York',
         valCol: 'Flow (MWh)',
       },
-      {
-        name: 'Total',
-        valCol: 'Flow (MWh)',
-      },
+      // {
+      //   name: 'Total',
+      //   valCol: 'Flow (MWh)',
+      // },
     ],
     highchartsOptions: {
       chart: {
@@ -1022,21 +1032,21 @@ const charts = [
           color: colors.supply.series[4],
           data: [],
         },
-        {
-          name: 'Total',
-          color: colors.supply.series[6],
-          data: [],
-        },
+        // {
+        //   name: 'Total',
+        //   color: colors.supply.series[6],
+        //   data: [],
+        // },
       ],
       title: {
-        text: 'Actual electricity trade flows',
+        text: 'Ontario: Actual electricity trade flows',
       },
       subtitle: {
         text: 'Source: <a href=\'http://www.ieso.ca/en/Power-Data/This-Hours-Data\'>IESO</a>',
         useHTML: true,
       },
       caption: {
-        text: 'Description: This graph contains real time data on electricity trade',
+        text: 'Description: This graph contains real time data on electricity trade. Negative values represent imports and positive values indicate exports from Ontario.',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: globalYAxisOptionsMWh,
@@ -1083,14 +1093,14 @@ const charts = [
         },
       ],
       title: {
-        text: 'Actual electricity trade flows',
+        text: 'Ontario: Scheduled electricity trade flows',
       },
       subtitle: {
         text: 'Source: <a href=\'http://www.ieso.ca/en/Power-Data/This-Hours-Data\'>IESO</a>',
         useHTML: true,
       },
       caption: {
-        text: 'Description: This graph contains real time data on scheduled electricity trade',
+        text: 'Description: This graph contains real time data on scheduled electricity trade.',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: globalYAxisOptionsMWh,
@@ -1106,7 +1116,7 @@ const charts = [
       },
     },
   },
-  { // ON: INTERCHANGE scheduled
+  { // ON: INTERCHANGE actual
     divId: 'on-rt-interchange-sched-v2',
     enabled: true,
     realtimeInterval: 60000, // every minute
@@ -1173,14 +1183,14 @@ const charts = [
         },
       ],
       title: {
-        text: 'Actual electricity trade flows',
+        text: 'Ontario: Actual electricity trade flows',
       },
       subtitle: {
         text: 'Source: <a href=\'http://www.ieso.ca/en/Power-Data/This-Hours-Data\'>IESO</a>',
         useHTML: true,
       },
       caption: {
-        text: 'Description: This graph contains real time data on scheduled electricity trade',
+        text: 'Description: This graph contains real time data on scheduled electricity trade.',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: globalYAxisOptionsMWh,
@@ -1212,16 +1222,15 @@ const charts = [
       },
       series: [{
         name: 'Electricity Price',
-        color: colors.price.light,
-        dashStyle: 'shortdot',
+        color: colors.price.main,
         data: [],
       }],
 
       title: {
-        text: 'Electricity Price',
+        text: 'Ontario: Electricity Price',
       },
       subtitle: {
-        text: 'Source: <a href=\'http://reports.ieso.ca/public/DispUnconsHOEP/>IESO</a>',
+        text: 'Source: <a href=\'http://reports.ieso.ca/public/DispUnconsHOEP/\'>IESO</a>',
         useHTML: true,
       },
       caption: {
@@ -1263,10 +1272,11 @@ const charts = [
       series: [
         {
           name: 'Net Load',
-          color: colors.demand.main,
+          color: colors.demand.ultralight,
           data: [],
         },
         {
+          type: 'spline',
           name: 'Wind Generation',
           color: colors.supply.light,
           dashStyle: 'shortdash',
@@ -1274,7 +1284,7 @@ const charts = [
         },
       ],
       title: {
-        text: 'Net load and wind generation',
+        text: 'Nova Scotia: Net load and wind generation',
       },
       subtitle: {
         text: 'Source: <a href=\'https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml\'>NSPower</a>',
@@ -1353,70 +1363,74 @@ const charts = [
       },
       series: [
         {
-          name: '',
+          name: 'Highlands Export',
           color: colors.supply.series[0],
           data: [],
         },
         {
-          name: '',
+          name: 'East End Export (at Sydney)',
           color: colors.supply.series[1],
           data: [],
         },
         {
-          name: '',
+          name: 'East End Export (at East Bay)',
           color: colors.supply.series[2],
           data: [],
         },
         {
-          name: '',
+          name: 'Cape Breton Export',
           color: colors.supply.series[3],
           data: [],
         },
         {
-          name: '',
+          name: 'Onslow Import',
           color: colors.supply.series[4],
           data: [],
         },
         {
-          name: '',
+          name: 'NS Export',
           color: colors.supply.series[5],
           data: [],
         },
         {
-          name: '',
+          name: 'Onslow South',
           color: colors.supply.series[6],
           data: [],
         },
         {
-          name: '',
+          name: 'Flow Into Metro',
           color: colors.supply.series[0],
+          dashStyle: 'shortdot',
           data: [],
         },
         {
-          name: '',
+          name: 'Western Import',
           color: colors.supply.series[1],
+          dashStyle: 'shortdot',
           data: [],
         },
         {
-          name: '',
+          name: 'Valley Import',
           color: colors.supply.series[2],
+          dashStyle: 'shortdot',
           data: [],
         },
         {
-          name: '',
+          name: 'Maritime Link Import',
           color: colors.supply.series[3],
+          dashStyle: 'shortdot',
           data: [],
         },
       ],
       title: {
-        text: 'Trade flows',
+        text: 'Nova Scotia: Trade flows',
       },
       subtitle: {
         text: 'Source: <a href=\'https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml\'>NSPower</a>',
         useHTML: true,
       },
       caption: {
-        text: 'Description: This graph contains real time data on Nova Scotia\'s electricity trade flows',
+        text: 'Description: This graph contains real time data on Nova Scotia\'s electricity trade flows. Negative values indicate imports into Nova Scotia, and positive values indicate exports.',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: globalYAxisOptionsMW,
@@ -1464,10 +1478,10 @@ const charts = [
         },
       ],
       title: {
-        text: 'Provincial electricity load and demand',
+        text: 'New Brunswick: Provincial electricity load and demand',
       },
       subtitle: {
-        text: 'Source: <a href=\'https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml\'>NSPower</a>',
+        text: 'Source: <a href=\'https://tso.nbpower.com/Public/en/SystemInformation_realtime.asp\'>NBPower</a>',
         useHTML: true,
       },
       caption: {
@@ -1487,7 +1501,7 @@ const charts = [
       },
     },
   },
-  { // NB: INTERCHANGE
+  { // NB: INTERCHANGE //TODO: Replace with correct NB data
     divId: 'nb-rt-interchange',
     enabled: true,
     realtimeInterval: 36000000, // every hour
@@ -1577,7 +1591,7 @@ const charts = [
       },
     },
   },
-  { // NF: SUPPLY
+  { // NL: SUPPLY
     divId: 'nl-rt-supply',
     enabled: true,
     realtimeInterval: 36000000, // every hour
@@ -1599,14 +1613,14 @@ const charts = [
         },
       ],
       title: {
-        text: 'Electricity generation',
+        text: 'Newfoundland and Labrador: Electricity generation',
       },
       subtitle: {
-        text: 'Source: <a href=\'https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml\'>NSPower</a>',
+        text: 'Source: <a href=\'https://nlhydro.com/system-information/supply-and-demand/\'>NLHydro</a>',
         useHTML: true,
       },
       caption: {
-        text: 'Description: This graphs contains real time data on New Brunswick\'s electricity load and demand.',
+        text: 'Description: This graph contains real time data on Newfoundland and Labrador\'s electricity generation.',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: globalYAxisOptionsMW,
@@ -1622,7 +1636,7 @@ const charts = [
       },
     },
   },
-  { // NF: PEI: SUPPLY DEMAND
+  { // PEI: SUPPLY DEMAND
     divId: 'pei-rt-supply-demand',
     enabled: true,
     realtimeInterval: 36000000, // every hour
@@ -1654,13 +1668,13 @@ const charts = [
       },
       series: [
         {
-          name: 'Generation',
-          color: colors.supply.main,
+          name: 'Total On-Island Load',
+          color: colors.demand.main,
           data: [],
         },
         {
           name: 'Wind Power Used',
-          color: colors.supply.main,
+          color: colors.demand.dark,
           data: [],
         },
         {
@@ -1670,24 +1684,24 @@ const charts = [
         },
         {
           name: 'Wind Power Exported',
-          color: colors.supply.main,
+          color: colors.supply.series[3],
           data: [],
         },
         {
           name: 'Total Fossil Fuel Generation',
-          color: colors.supply.main,
+          color: colors.supply.dark,
           data: [],
         },
       ],
       title: {
-        text: 'PEI Load, generation and trade',
+        text: 'PEI: Load and generation',
       },
       subtitle: {
-        text: 'Source: <a href=\'https://resourcesprd-nspower.aws.silvertech.net/oasis/current_report.shtml\'>NSPower</a>',
+        text: 'Source: <a href=\'https://www.princeedwardisland.ca/en/feature/pei-wind-energy#/home/WindEnergy/WindEnergy\'>Government of Prince Edward Island</a>',
         useHTML: true,
       },
       caption: {
-        text: 'Description: This graphs contains real time data on New Brunswick\'s electricity load and demand.',
+        text: 'Description: This graph contains real time data on Prince Edward Island\'s electricity load and generation by fuel type.',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: globalYAxisOptionsMW,
