@@ -732,7 +732,7 @@ const charts = [
     ],
     highchartsOptions: {
       chart: {
-        type: 'areaspline',
+        type: 'spline',
       },
       series: [
         {
@@ -776,6 +776,7 @@ const charts = [
       tooltip: mwTooltipOptions,
       plotOptions: {
         areaspline: globalAreaSplineOptions,
+        spline: globalSplineOptions,
       },
       navigation: {},
       time: {
@@ -1392,21 +1393,25 @@ const charts = [
         {
           name: 'Flow Into Metro',
           color: colors.supply.series[0],
+          dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Western Import',
           color: colors.supply.series[1],
+          dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Valley Import',
           color: colors.supply.series[2],
+          dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Maritime Link Import',
           color: colors.supply.series[3],
+          dashStyle: 'shortdot',
           data: [],
         },
       ],
@@ -1656,7 +1661,7 @@ const charts = [
       },
       series: [
         {
-          name: 'Generation',
+          name: 'Total On-Island Load',
           color: colors.supply.main,
           data: [],
         },
