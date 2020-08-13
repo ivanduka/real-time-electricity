@@ -743,7 +743,6 @@ const charts = [
       },
       series: [
         {
-          type: 'areaspline',
           name: 'Total Energy',
           color: colors.demand.ultralight,
           data: [],
