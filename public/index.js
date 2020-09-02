@@ -16,8 +16,8 @@ const colors = {
     total_fossil: "#d84405",
   },
   price: {
-    light: "#48e6a0", //"#04fba4",
-    main: "#00bb83"
+    light: "#74c2a3", //"#04fba4",
+    main: "#19808b"
   },
   supply: {
     dark: '#0000ff',
@@ -1735,22 +1735,23 @@ const charts = [
         },
         {
           name: 'Wind Power Used',
-          color: colors.demand.dark,
+          color: colors.source.wind,
           data: [],
         },
         {
           name: 'Total Wind Generation',
-          color: colors.supply.main,
+          color: colors.source.total_wind,
           data: [],
         },
         {
           name: 'Wind Power Exported',
-          color: colors.supply.series[3],
+          color: colors.source.wind,
+          dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Total Fossil Fuel Generation',
-          color: colors.supply.dark,
+          color: colors.source.total_fossil,
           data: [],
         },
       ],
