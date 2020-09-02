@@ -219,6 +219,55 @@ const setGlobalChartTheme = () => {
 // Charts definitions
 
 const charts = [
+  { // BC: DEMAND (TODO) 
+    divId: 'bc-rt-demand',
+    enabled: true,
+    realtimeInterval: 36000000, // every hour
+    seriesInfo: [
+      // different table format here
+      {
+        name: 'BC_Load',
+        valCol: 'Value (MW)',
+      },
+    ],
+    highchartsOptions: {
+      chart: {
+        type: 'spline',
+      },
+      series: [
+        {
+          type: 'areaspline',
+          name: 'BC Load',
+          color: colors.demand.ultralight,
+          data: [],
+        },
+      ],
+      title: {
+        text: 'British Columbia: Load',
+      },
+      subtitle: {
+        text:
+          'Source: <a href=\'\'>BC Hydro</a>',
+        useHTML: true,
+      },
+      caption: {
+        text:
+          'Description: ',
+      },
+      xAxis: globalXAxisOptionsDateTime,
+      yAxis: globalYAxisOptionsMW,
+      tooltip: mwTooltipOptions,
+
+      plotOptions: {
+        spline: globalSplineOptions,
+      },
+      navigation: {},
+      time: {
+        timezone: 'America/Vancouver',
+        useUTC: false,
+      },
+    },
+  },
   { // AB: PRICE Realtime, Forecast
     divId: 'ab-rt-fc-price',
     enabled: true,
