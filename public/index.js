@@ -3,6 +3,18 @@
 //#region Styling
 
 const colors = {
+  source: {
+    wind: "#00d9d5",
+    hydro: "#1b93d2",
+    bio: "#a433d8",
+    nuclear: "#b6cc4a",
+    gas: "#ff5585",
+    coal: "#eb8f6b",
+    solar: "#ffd700",
+    total: "#013f5c",
+    total_wind: "#00a7a4",
+    total_fossil: "#d84405",
+  },
   price: {
     light: "#48e6a0", //"#04fba4",
     main: "#00bb83"
@@ -878,32 +890,32 @@ const charts = [
       series: [
         {
           name: 'Biofuel',
-          color: colors.supply.series[0],
+          color: colors.source.bio,
           data: [],
         },
         {
           name: 'Gas',
-          color: colors.supply.series[1],
+          color: colors.source.gas,
           data: [],
         },
         {
           name: 'Hydro',
-          color: colors.supply.series[2],
+          color: colors.source.hydro,
           data: [],
         },
         {
           name: 'Nuclear',
-          color: colors.supply.series[3],
+          color: colors.source.nuclear,
           data: [],
         },
         {
           name: 'Solar',
-          color: colors.supply.series[4],
+          color: colors.source.solar,
           data: [],
         },
         {
           name: 'Wind',
-          color: colors.supply.series[6],
+          color: colors.source.wind,
           data: [],
         },
       ],
@@ -968,32 +980,32 @@ const charts = [
       series: [
         {
           name: 'Biofuel',
-          color: colors.supply.series[0],
+          color: colors.source.bio,
           data: [],
         },
         {
           name: 'Gas',
-          color: colors.supply.series[1],
+          color: colors.source.gas,
           data: [],
         },
         {
           name: 'Hydro',
-          color: colors.supply.series[2],
+          color: colors.source.hydro,
           data: [],
         },
         {
           name: 'Nuclear',
-          color: colors.supply.series[3],
+          color: colors.source.nuclear,
           data: [],
         },
         {
           name: 'Solar',
-          color: colors.supply.series[4],
+          color: colors.source.solar,
           data: [],
         },
         {
           name: 'Wind',
-          color: colors.supply.series[6],
+          color: colors.source.wind,
           data: [],
         },
       ],
