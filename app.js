@@ -69,31 +69,31 @@ const queries = {
   'ab-rt-capability': [`
       SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability
       FROM AESO_Generation
-      WHERE Fuel='WIND'
+      WHERE Fuel='WIND' NOT Asset='TOTAL'
       GROUP BY DateTime
       ORDER BY DateTime DESC;
     `, `
       SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability
       FROM AESO_Generation
-      WHERE Fuel='BIOMASS AND OTHER'
+      WHERE Fuel='BIOMASS AND OTHER' NOT Asset='TOTAL'
       GROUP BY DateTime
       ORDER BY DateTime DESC;
     `, `
       SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability
       FROM AESO_Generation
-      WHERE Fuel='GAS'
+      WHERE Fuel='GAS' NOT Asset='TOTAL'
       GROUP BY DateTime
       ORDER BY DateTime DESC;
     `, `
       SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability
       FROM AESO_Generation
-      WHERE Fuel='HYDRO'
+      WHERE Fuel='HYDRO' NOT Asset='TOTAL'
       GROUP BY DateTime
       ORDER BY DateTime DESC;
     `, `
       SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability
       FROM AESO_Generation
-      WHERE Fuel='COAL'
+      WHERE Fuel='COAL' NOT Asset='TOTAL'
       GROUP BY DateTime
       ORDER BY DateTime DESC;
     `, `
