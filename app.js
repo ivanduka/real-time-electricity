@@ -198,9 +198,9 @@ const queries = {
     'SELECT TOP 30 DateTime,  [NB Demand] FROM NBPower_SystemInformation ORDER BY DateTime DESC',
   ],
   'nb-rt-interchange': [`
-    SELECT TOP 30 DateTime, [East End Export (at Sydney)], [East End Export (at East Bay)],
-                  [Cape Breton Export], [Onslow Import], [NS Export], [Onslow South]
-    FROM NSPower_SystemInformation ORDER BY DateTime DESC;
+    SELECT TOP 30 DateTime, [ISO-NE], [EMEC], [MPS],
+                  [QUEBEC], [NOVA SCOTIA], [PEI], 
+    FROM NBPower_SystemInformation ORDER BY DateTime DESC;
   `],
   'nl-rt-supply': [
     'SELECT TOP 30 DateTime, [Generation (MW)] FROM Nlhydro_SystemInformation ORDER BY DateTime DESC',

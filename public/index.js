@@ -1575,28 +1575,28 @@ const charts = [
     realtimeInterval: 36000000, // every hour
     seriesInfo: [ // different table format here
       {
-        name: 'East End Export (at Sydney)?',
-        valCol: 'East End Export (at Sydney)',
+        name: 'ISO-NE',
+        valCol: 'ISO-NE',
       },
       {
-        name: 'East End Export (at East Bay)?',
-        valCol: 'East End Export (at East Bay)',
+        name: 'EMEC',
+        valCol: 'EMEC',
       },
       {
-        name: 'Cape Breton Export?',
-        valCol: 'Cape Breton Export',
+        name: 'MPS',
+        valCol: 'MPS',
       },
       {
-        name: 'Onslow Import?',
-        valCol: 'Onslow Import',
+        name: 'Québec',
+        valCol: 'QUEBEC',
       },
       {
-        name: 'NS Export?',
-        valCol: 'NS Export',
+        name: 'Nova Scotia',
+        valCol: 'NOVA SCOTIA',
       },
       {
-        name: 'Onslow South?',
-        valCol: 'Onslow South',
+        name: 'PEI',
+        valCol: 'PEI',
       },
     ],
     highchartsOptions: {
