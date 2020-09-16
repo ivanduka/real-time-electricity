@@ -1605,32 +1605,32 @@ const charts = [
       },
       series: [
         {
-          name: '',
+          name: 'ISO-NE',
           color: colors.supply.series[0],
           data: [],
         },
         {
-          name: '',
+          name: 'EMEC',
           color: colors.supply.series[1],
           data: [],
         },
         {
-          name: '',
+          name: 'MPS',
           color: colors.supply.series[2],
           data: [],
         },
         {
-          name: '',
+          name: 'Québec',
           color: colors.supply.series[3],
           data: [],
         },
         {
-          name: '',
+          name: 'Nova Scotia',
           color: colors.supply.series[4],
           data: [],
         },
         {
-          name: '',
+          name: 'PEI',
           color: colors.supply.series[5],
           data: [],
         },
