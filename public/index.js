@@ -1569,7 +1569,7 @@ const charts = [
       },
     },
   },
-  { // NB: INTERCHANGE //TODO: Replace with correct NB data
+  { // NB: INTERCHANGE 
     divId: 'nb-rt-interchange',
     enabled: true,
     realtimeInterval: 36000000, // every hour
@@ -1606,32 +1606,32 @@ const charts = [
       series: [
         {
           name: 'ISO-NE',
-          color: colors.supply.series[0],
+          color: colors.trade[0],
           data: [],
         },
         {
           name: 'EMEC',
-          color: colors.supply.series[1],
+          color: colors.trade[1],
           data: [],
         },
         {
           name: 'MPS',
-          color: colors.supply.series[2],
+          color: colors.trade[2],
           data: [],
         },
         {
           name: 'Québec',
-          color: colors.supply.series[3],
+          color: colors.trade[3],
           data: [],
         },
         {
           name: 'Nova Scotia',
-          color: colors.supply.series[4],
+          color: colors.trade[4],
           data: [],
         },
         {
           name: 'PEI',
-          color: colors.supply.series[5],
+          color: colors.trade[5],
           data: [],
         },
       ],
