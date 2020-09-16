@@ -69,31 +69,31 @@ const queries = {
   'ab-rt-capability': [`
       SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability
       FROM AESO_Generation
-      WHERE Fuel='WIND'
+      WHERE Fuel='WIND' NOT Asset='TOTAL'
       GROUP BY DateTime
       ORDER BY DateTime DESC;
     `, `
       SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability
       FROM AESO_Generation
-      WHERE Fuel='BIOMASS AND OTHER'
+      WHERE Fuel='BIOMASS AND OTHER' NOT Asset='TOTAL'
       GROUP BY DateTime
       ORDER BY DateTime DESC;
     `, `
       SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability
       FROM AESO_Generation
-      WHERE Fuel='GAS'
+      WHERE Fuel='GAS' NOT Asset='TOTAL'
       GROUP BY DateTime
       ORDER BY DateTime DESC;
     `, `
       SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability
       FROM AESO_Generation
-      WHERE Fuel='HYDRO'
+      WHERE Fuel='HYDRO' NOT Asset='TOTAL'
       GROUP BY DateTime
       ORDER BY DateTime DESC;
     `, `
       SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability
       FROM AESO_Generation
-      WHERE Fuel='COAL'
+      WHERE Fuel='COAL' NOT Asset='TOTAL'
       GROUP BY DateTime
       ORDER BY DateTime DESC;
     `, `
@@ -198,9 +198,9 @@ const queries = {
     'SELECT TOP 30 DateTime,  [NB Demand] FROM NBPower_SystemInformation ORDER BY DateTime DESC',
   ],
   'nb-rt-interchange': [`
-    SELECT TOP 30 DateTime, [East End Export (at Sydney)], [East End Export (at East Bay)],
-                  [Cape Breton Export], [Onslow Import], [NS Export], [Onslow South]
-    FROM NSPower_SystemInformation ORDER BY DateTime DESC;
+    SELECT TOP 30 DateTime, [ISO-NE], [EMEC], [MPS],
+                  [QUEBEC], [NOVA SCOTIA], [PEI], 
+    FROM NBPower_SystemInformation ORDER BY DateTime DESC;
   `],
   'nl-rt-supply': [
     'SELECT TOP 30 DateTime, [Generation (MW)] FROM Nlhydro_SystemInformation ORDER BY DateTime DESC',

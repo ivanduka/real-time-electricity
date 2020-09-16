@@ -3,10 +3,29 @@
 //#region Styling
 
 const colors = {
-  price: {
-    light: "#48e6a0", //"#04fba4",
-    main: "#00bb83"
+  source: {
+    wind: "#00d9d5",
+    hydro: "#1b93d2",
+    bio: "#a433d8",
+    nuclear: "#b6cc4a",
+    gas: "#ff5585",
+    coal: "#eb8f6b",
+    fossil: "#eb8f6b",
+    solar: "#ffd700",
+    total: "#013f5c",
+    total_wind: "#00a7a4",
+    total_fossil: "#d84405",
   },
+  price: {
+    light: "#74c2a3", //"#04fba4",
+    main: "#19808b"
+  },
+  trade: ["#2247b5",
+  "#a23eab",
+  "#e5408f",
+  "#ff646c",
+  "#ff974e",
+  "#ffcb47"],
   supply: {
     dark: '#0000ff',
     main: '#9d02d7',
@@ -219,6 +238,55 @@ const setGlobalChartTheme = () => {
 // Charts definitions
 
 const charts = [
+  { // BC: DEMAND (TODO) 
+    divId: 'bc-rt-demand',
+    enabled: true,
+    realtimeInterval: 36000000, // every hour
+    seriesInfo: [
+      // different table format here
+      {
+        name: 'BC_Load',
+        valCol: 'Value (MW)',
+      },
+    ],
+    highchartsOptions: {
+      chart: {
+        type: 'spline',
+      },
+      series: [
+        {
+          type: 'areaspline',
+          name: 'BC Load',
+          color: colors.demand.ultralight,
+          data: [],
+        },
+      ],
+      title: {
+        text: 'British Columbia: Load',
+      },
+      subtitle: {
+        text:
+          'Source: <a href=\'\'>BC Hydro</a>',
+        useHTML: true,
+      },
+      caption: {
+        text:
+          'Description: ',
+      },
+      xAxis: globalXAxisOptionsDateTime,
+      yAxis: globalYAxisOptionsMW,
+      tooltip: mwTooltipOptions,
+
+      plotOptions: {
+        spline: globalSplineOptions,
+      },
+      navigation: {},
+      time: {
+        timezone: 'America/Vancouver',
+        useUTC: false,
+      },
+    },
+  },
   { // AB: PRICE Realtime, Forecast
     divId: 'ab-rt-fc-price',
     enabled: true,
@@ -829,32 +897,32 @@ const charts = [
       series: [
         {
           name: 'Biofuel',
-          color: colors.supply.series[0],
+          color: colors.source.bio,
           data: [],
         },
         {
           name: 'Gas',
-          color: colors.supply.series[1],
+          color: colors.source.gas,
           data: [],
         },
         {
           name: 'Hydro',
-          color: colors.supply.series[2],
+          color: colors.source.hydro,
           data: [],
         },
         {
           name: 'Nuclear',
-          color: colors.supply.series[3],
+          color: colors.source.nuclear,
           data: [],
         },
         {
           name: 'Solar',
-          color: colors.supply.series[4],
+          color: colors.source.solar,
           data: [],
         },
         {
           name: 'Wind',
-          color: colors.supply.series[6],
+          color: colors.source.wind,
           data: [],
         },
       ],
@@ -919,32 +987,32 @@ const charts = [
       series: [
         {
           name: 'Biofuel',
-          color: colors.supply.series[0],
+          color: colors.source.bio,
           data: [],
         },
         {
           name: 'Gas',
-          color: colors.supply.series[1],
+          color: colors.source.gas,
           data: [],
         },
         {
           name: 'Hydro',
-          color: colors.supply.series[2],
+          color: colors.source.hydro,
           data: [],
         },
         {
           name: 'Nuclear',
-          color: colors.supply.series[3],
+          color: colors.source.nuclear,
           data: [],
         },
         {
           name: 'Solar',
-          color: colors.supply.series[4],
+          color: colors.source.solar,
           data: [],
         },
         {
           name: 'Wind',
-          color: colors.supply.series[6],
+          color: colors.source.wind,
           data: [],
         },
       ],
@@ -1364,60 +1432,60 @@ const charts = [
       series: [
         {
           name: 'Highlands Export',
-          color: colors.supply.series[0],
+          color: colors.trade[0],
           data: [],
         },
         {
           name: 'East End Export (at Sydney)',
-          color: colors.supply.series[1],
+          color: colors.trade[1],
           data: [],
         },
         {
           name: 'East End Export (at East Bay)',
-          color: colors.supply.series[2],
+          color: colors.trade[2],
           data: [],
         },
         {
           name: 'Cape Breton Export',
-          color: colors.supply.series[3],
+          color: colors.trade[3],
           data: [],
         },
         {
           name: 'Onslow Import',
-          color: colors.supply.series[4],
+          color: colors.trade[4],
           data: [],
         },
         {
           name: 'NS Export',
-          color: colors.supply.series[5],
+          color: colors.trade[5],
           data: [],
         },
         {
           name: 'Onslow South',
-          color: colors.supply.series[6],
+          color: colors.trade[0],
           data: [],
         },
         {
           name: 'Flow Into Metro',
-          color: colors.supply.series[0],
+          color: colors.trade[1],
           dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Western Import',
-          color: colors.supply.series[1],
+          color: colors.trade[2],
           dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Valley Import',
-          color: colors.supply.series[2],
+          color: colors.trade[3],
           dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Maritime Link Import',
-          color: colors.supply.series[3],
+          color: colors.trade[4],
           dashStyle: 'shortdot',
           data: [],
         },
@@ -1507,28 +1575,28 @@ const charts = [
     realtimeInterval: 36000000, // every hour
     seriesInfo: [ // different table format here
       {
-        name: 'East End Export (at Sydney)?',
-        valCol: 'East End Export (at Sydney)',
+        name: 'ISO-NE',
+        valCol: 'ISO-NE',
       },
       {
-        name: 'East End Export (at East Bay)?',
-        valCol: 'East End Export (at East Bay)',
+        name: 'EMEC',
+        valCol: 'EMEC',
       },
       {
-        name: 'Cape Breton Export?',
-        valCol: 'Cape Breton Export',
+        name: 'MPS',
+        valCol: 'MPS',
       },
       {
-        name: 'Onslow Import?',
-        valCol: 'Onslow Import',
+        name: 'Québec',
+        valCol: 'QUEBEC',
       },
       {
-        name: 'NS Export?',
-        valCol: 'NS Export',
+        name: 'Nova Scotia',
+        valCol: 'NOVA SCOTIA',
       },
       {
-        name: 'Onslow South?',
-        valCol: 'Onslow South',
+        name: 'PEI',
+        valCol: 'PEI',
       },
     ],
     highchartsOptions: {
@@ -1674,22 +1742,23 @@ const charts = [
         },
         {
           name: 'Wind Power Used',
-          color: colors.demand.dark,
+          color: colors.source.wind,
           data: [],
         },
         {
           name: 'Total Wind Generation',
-          color: colors.supply.main,
+          color: colors.source.total_wind,
           data: [],
         },
         {
           name: 'Wind Power Exported',
-          color: colors.supply.series[3],
+          color: colors.source.wind,
+          dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Total Fossil Fuel Generation',
-          color: colors.supply.dark,
+          color: colors.source.fossil,
           data: [],
         },
       ],
