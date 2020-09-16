@@ -309,7 +309,7 @@ const charts = [
         {
           name: 'Forecasted Pool Price ($/MWh)',
           color: colors.price.light,
-          dashStyle: 'shortdot',
+          dashStyle: 'shortdash',
           data: [],
         },
         {
@@ -368,7 +368,7 @@ const charts = [
           type: 'spline',
           name: 'Day-Ahead Forecasted AIL',
           color: colors.demand.dark,
-          dashStyle: 'shortdot',
+          dashStyle: 'shortdash',
           data: [],
         },
         {
@@ -633,32 +633,32 @@ const charts = [
       series: [
         {
           name: 'Wind',
-          color: colors.supply.series[0],
+          color: colors.source.wind,
           data: [],
         },
         {
           name: 'Biomass and Other',
-          color: colors.supply.series[1],
+          color: colors.source.bio,
           data: [],
         },
         {
           name: 'Gas',
-          color: colors.supply.series[2],
+          color: colors.source.gas,
           data: [],
         },
         {
           name: 'Hydro',
-          color: colors.supply.series[3],
+          color: colors.source.hydro,
           data: [],
         },
         {
           name: 'Coal',
-          color: colors.supply.series[4],
+          color: colors.source.coal,
           data: [],
         },
         {
           name: 'Total',
-          color: colors.supply.series[6],
+          color: colors.source.total,
           data: [],
         },
       ],
@@ -728,32 +728,32 @@ const charts = [
       series: [
         {
           name: 'Wind',
-          color: colors.supply.series[0],
+          color: colors.source.wind,
           data: [],
         },
         {
           name: 'Biomass and Other',
-          color: colors.supply.series[1],
+          color: colors.source.bio,
           data: [],
         },
         {
           name: 'Gas',
-          color: colors.supply.series[2],
+          color: colors.source.gas,
           data: [],
         },
         {
           name: 'Hydro',
-          color: colors.supply.series[3],
+          color: colors.source.hydro,
           data: [],
         },
         {
           name: 'Coal',
-          color: colors.supply.series[4],
+          color: colors.source.coal,
           data: [],
         },
         {
           name: 'Total',
-          color: colors.supply.series[6],
+          color: colors.source.total,
           data: [],
         },
       ],
@@ -1152,6 +1152,7 @@ const charts = [
         {
           name: 'Exports',
           color: colors.supply.series[0],
+          dashStyle: 'shortdot',
           data: [],
         },
         {
@@ -1347,7 +1348,6 @@ const charts = [
           type: 'spline',
           name: 'Wind Generation',
           color: colors.supply.light,
-          dashStyle: 'shortdash',
           data: [],
         },
       ],
@@ -1433,21 +1433,25 @@ const charts = [
         {
           name: 'Highlands Export',
           color: colors.trade[0],
+          dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'East End Export (at Sydney)',
           color: colors.trade[1],
+          dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'East End Export (at East Bay)',
           color: colors.trade[2],
+          dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Cape Breton Export',
           color: colors.trade[3],
+          dashStyle: 'shortdot',
           data: [],
         },
         {
@@ -1458,6 +1462,7 @@ const charts = [
         {
           name: 'NS Export',
           color: colors.trade[5],
+          dashStyle: 'shortdot',
           data: [],
         },
         {
@@ -1468,25 +1473,21 @@ const charts = [
         {
           name: 'Flow Into Metro',
           color: colors.trade[1],
-          dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Western Import',
           color: colors.trade[2],
-          dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Valley Import',
           color: colors.trade[3],
-          dashStyle: 'shortdot',
           data: [],
         },
         {
           name: 'Maritime Link Import',
           color: colors.trade[4],
-          dashStyle: 'shortdot',
           data: [],
         },
       ],
@@ -1541,7 +1542,6 @@ const charts = [
         {
           name: 'Demand',
           color: colors.demand.light,
-          dashStyle: 'shortdash',
           data: [],
         },
       ],
@@ -1569,7 +1569,7 @@ const charts = [
       },
     },
   },
-  { // NB: INTERCHANGE //TODO: Replace with correct NB data
+  { // NB: INTERCHANGE 
     divId: 'nb-rt-interchange',
     enabled: true,
     realtimeInterval: 36000000, // every hour
@@ -1605,33 +1605,33 @@ const charts = [
       },
       series: [
         {
-          name: '',
-          color: colors.supply.series[0],
+          name: 'ISO-NE',
+          color: colors.trade[0],
           data: [],
         },
         {
-          name: '',
-          color: colors.supply.series[1],
+          name: 'EMEC',
+          color: colors.trade[1],
           data: [],
         },
         {
-          name: '',
-          color: colors.supply.series[2],
+          name: 'MPS',
+          color: colors.trade[2],
           data: [],
         },
         {
-          name: '',
-          color: colors.supply.series[3],
+          name: 'Québec',
+          color: colors.trade[3],
           data: [],
         },
         {
-          name: '',
-          color: colors.supply.series[4],
+          name: 'Nova Scotia',
+          color: colors.trade[4],
           data: [],
         },
         {
-          name: '',
-          color: colors.supply.series[5],
+          name: 'PEI',
+          color: colors.trade[5],
           data: [],
         },
       ],
@@ -1676,7 +1676,7 @@ const charts = [
       series: [
         {
           name: 'Generation',
-          color: colors.supply.main,
+          color: colors.source.total,
           data: [],
         },
       ],
