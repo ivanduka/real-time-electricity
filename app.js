@@ -18,6 +18,16 @@ const apiLimiter = rateLimit({
 });
 
 const queries = {
+  'bc-rt-trade': [`
+    SELECT TOP 30 DateTime, "BC-US Actual (MW)", "BC-AB Actual (MW)" 
+    FROM BC_Flow
+    ORDER BY DateTime DESC;
+  `],
+  'bc-rt-demand': [`
+    SELECT TOP 30 DateTime, Load
+    FROM BC_Load
+    ORDER BY DateTime DESC;
+  `],
   'ab-rt-fc-price': [`
     SELECT TOP 30 "DateTime", "Forecast Pool Price", "Actual Posted Pool Price"
     FROM AESO_ActualForecast
@@ -81,7 +91,7 @@ const queries = {
     `, `
       SELECT TOP 100 DateTime, SUM([Maximum Capability (MW)]) AS TotalMaxWindCapability
       FROM AESO_Generation
-      WHERE Fuel='GAS' AND NOT Asset='TOTAL'
+      WHERE Fuel='GAS'
       GROUP BY DateTime
       ORDER BY DateTime DESC;
     `, `
