@@ -18,11 +18,11 @@ const apiLimiter = rateLimit({
 });
 
 const queries = {
-  // 'bc-rt-trade': [`
-  //   SELECT TOP 30 "DateTime", "BC-US Actual (MW)", "BC-AB Actual (MW)" 
-  //   FROM BC_Flow
-  //   ORDER BY DateTime DESC;
-  // `],
+  'bc-rt-trade': [`
+    SELECT TOP 30 "DateTime", "BC-US Actual (MW)", "BC-AB Actual (MW)" 
+    FROM BC_Flow
+    ORDER BY DateTime DESC;
+  `],
   'bc-rt-demand': [`
     SELECT TOP 30 "DateTime", "Load (MW)"
     FROM BC_Load
