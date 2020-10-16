@@ -21,11 +21,11 @@ const colors = {
     main: "#19808b"
   },
   trade: ["#2247b5",
-  "#a23eab",
-  "#e5408f",
-  "#ff646c",
-  "#ff974e",
-  "#ffcb47"],
+    "#a23eab",
+    "#e5408f",
+    "#ff646c",
+    "#ff974e",
+    "#ffcb47"],
   supply: {
     dark: '#0000ff',
     main: '#9d02d7',
@@ -238,62 +238,62 @@ const setGlobalChartTheme = () => {
 // Charts definitions
 
 const charts = [
-  // { // BC: TRADE (TODO) 
-  //   divId: 'bc-rt-trade',
-  //   enabled: true,
-  //   realtimeInterval: 60000, // every minute
-  //   seriesInfo: [
-  //     {
-  //       name: 'BC-US Actual (MW)',
-  //       valCol: 'BC-US Actual (MW)',
-  //     },
-  //     {
-  //       name: 'BC-AB Actual (MW)',
-  //       valCol: 'BC-AB Actual (MW)',
-  //     },
-  //   ],
-  //   highchartsOptions: {
-  //     chart: {
-  //       type: 'spline',
-  //     },
-  //     series: [
-  //       {
-  //         name: 'British Columbia',
-  //         color: colors.supply.trade[0],
-  //         data: [],
-  //       },
-  //       {
-  //         name: 'Montana',
-  //         color: colors.supply.trade[1],
-  //         data: [],
-  //       },
-  //     ],
-  //     title: {
-  //       text: 'British Columbia: Realtime electricity trade',
-  //     },
-  //     subtitle: {
-  //       text:
-  //         'Source: <a href=\'https://www.bchydro.com/energy-in-bc/operations/transmission/transmission-system/actual-flow-data.html\'>BC Hydro</a>',
-  //       useHTML: true,
-  //     },
-  //     caption: {
-  //       text:
-  //         'Description: This graph contains real time data on British Columbia\'s electricity trade flows with the U.S and with Alberta.',
-  //     },
-  //     xAxis: globalXAxisOptionsDateTime,
-  //     yAxis: globalYAxisOptionsMW,
-  //     tooltip: mwTooltipOptions,
+  { // BC: TRADE (TODO) 
+    divId: 'bc-rt-trade',
+    enabled: true,
+    realtimeInterval: 60000, // every minute
+    seriesInfo: [
+      {
+        name: 'BC-US Actual (MW)',
+        valCol: 'BC-US Actual (MW)',
+      },
+      {
+        name: 'BC-AB Actual (MW)',
+        valCol: 'BC-AB Actual (MW)',
+      },
+    ],
+    highchartsOptions: {
+      chart: {
+        type: 'spline',
+      },
+      series: [
+        {
+          name: 'BC-US Actual (MW)',
+          color: colors.trade[0],
+          data: [],
+        },
+        {
+          name: 'BC-AB Actual (MW)',
+          color: colors.trade[3],
+          data: [],
+        },
+      ],
+      title: {
+        text: 'British Columbia: Realtime electricity trade',
+      },
+      subtitle: {
+        text:
+          'Source: <a href=\'https://www.bchydro.com/energy-in-bc/operations/transmission/transmission-system/actual-flow-data.html\'>BC Hydro</a>',
+        useHTML: true,
+      },
+      caption: {
+        text:
+          'Description: This graph contains real time data on British Columbia\'s electricity trade flows with the U.S and with Alberta.',
+      },
+      xAxis: globalXAxisOptionsDateTime,
+      yAxis: globalYAxisOptionsMW,
+      tooltip: mwTooltipOptions,
 
-  //     plotOptions: {
-  //       spline: globalSplineOptions,
-  //     },
-  //     navigation: {},
-  //     time: {
-  //       timezone: 'America/Vancouver',
-  //       useUTC: false,
-  //     },
-  //   },
-  // },
+      plotOptions: {
+        spline: globalSplineOptions,
+      },
+      navigation: {},
+      time: {
+        timezone: 'America/Vancouver',
+        useUTC: false,
+      },
+    },
+  },
   { // BC: DEMAND  
     divId: 'bc-rt-demand',
     enabled: true,
@@ -301,7 +301,7 @@ const charts = [
     seriesInfo: [
       // different table format here
       {
-        name: 'BC_Load',
+        name: 'Load (MW)',
         valCol: 'Load (MW)',
       },
     ],
