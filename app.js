@@ -24,9 +24,8 @@ const queries = {
   //   ORDER BY DateTime DESC;
   // `],
   'bc-rt-demand': [`
-    SELECT TOP 30 "DateTime", "Forecast Pool Price", "Actual Posted Pool Price"
-    FROM AESO_ActualForecast
-    WHERE "Forecast Pool Price" IS NOT NULL
+    SELECT TOP 30 "DateTime", "Load (MW)"
+    FROM BC_Load
     ORDER BY DateTime DESC;
   `],
   'ab-rt-fc-price': [`
