@@ -264,7 +264,7 @@ const charts = [
         },
         {
           name: 'BC-AB Actual (MW)',
-          color: colors.trade[3],
+          color: colors.trade[1],
           data: [],
         },
       ],
