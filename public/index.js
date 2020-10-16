@@ -21,11 +21,11 @@ const colors = {
     main: "#19808b"
   },
   trade: ["#2247b5",
-  "#a23eab",
-  "#e5408f",
-  "#ff646c",
-  "#ff974e",
-  "#ffcb47"],
+    "#a23eab",
+    "#e5408f",
+    "#ff646c",
+    "#ff974e",
+    "#ffcb47"],
   supply: {
     dark: '#0000ff',
     main: '#9d02d7',
@@ -238,15 +238,18 @@ const setGlobalChartTheme = () => {
 // Charts definitions
 
 const charts = [
-  { // BC: DEMAND (TODO) 
-    divId: 'bc-rt-demand',
+  { // BC: TRADE (TODO) 
+    divId: 'bc-rt-trade',
     enabled: true,
-    realtimeInterval: 36000000, // every hour
+    realtimeInterval: 60000, // every minute
     seriesInfo: [
-      // different table format here
       {
-        name: 'BC_Load',
-        valCol: 'Value (MW)',
+        name: 'BC-US Actual (MW)',
+        valCol: 'BC-US Actual (MW)',
+      },
+      {
+        name: 'BC-AB Actual (MW)',
+        valCol: 'BC-AB Actual (MW)',
       },
     ],
     highchartsOptions: {
@@ -255,23 +258,75 @@ const charts = [
       },
       series: [
         {
-          type: 'areaspline',
-          name: 'BC Load',
-          color: colors.demand.ultralight,
+          name: 'BC-US Actual (MW)',
+          color: colors.trade[0],
+          data: [],
+        },
+        {
+          name: 'BC-AB Actual (MW)',
+          color: colors.trade[3],
           data: [],
         },
       ],
       title: {
-        text: 'British Columbia: Load',
+        text: 'British Columbia: Realtime electricity trade',
       },
       subtitle: {
         text:
-          'Source: <a href=\'\'>BC Hydro</a>',
+          'Source: <a href=\'https://www.bchydro.com/energy-in-bc/operations/transmission/transmission-system/actual-flow-data.html\'>BC Hydro</a>',
         useHTML: true,
       },
       caption: {
         text:
-          'Description: ',
+          'Description: This graph contains real time data on British Columbia\'s electricity trade flows with the U.S and with Alberta.',
+      },
+      xAxis: globalXAxisOptionsDateTime,
+      yAxis: globalYAxisOptionsMW,
+      tooltip: mwTooltipOptions,
+
+      plotOptions: {
+        spline: globalSplineOptions,
+      },
+      navigation: {},
+      time: {
+        timezone: 'America/Vancouver',
+        useUTC: false,
+      },
+    },
+  },
+  { // BC: DEMAND  
+    divId: 'bc-rt-demand',
+    enabled: true,
+    realtimeInterval: 36000000, // every hour
+    seriesInfo: [
+      // different table format here
+      {
+        name: 'Load (MW)',
+        valCol: 'Load (MW)',
+      },
+    ],
+    highchartsOptions: {
+      chart: {
+        type: 'spline',
+      },
+      series: [
+        {
+          name: 'Load (MW)',
+          color: colors.demand.main,
+          data: [],
+        },
+      ],
+      title: {
+        text: 'British Columbia: Realtime electricity load',
+      },
+      subtitle: {
+        text:
+          'Source: <a href=\'https://www.bchydro.com/energy-in-bc/operations/transmission/transmission-system/balancing-authority-load-data.html\'>BC Hydro</a>',
+        useHTML: true,
+      },
+      caption: {
+        text:
+          'Description: This graph contains real time data on British Columbia\'s electricity load.',
       },
       xAxis: globalXAxisOptionsDateTime,
       yAxis: globalYAxisOptionsMW,
